@@ -1,0 +1,528 @@
+<div class="content">
+    <!--<div class="admin-header-search">
+        <form method="get">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="md-icon">search</i>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter your search keyword ...">
+            </div>
+        </form>
+    </div>-->
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="push-top-bottom">
+                    <div class="listing-detail">
+                        <div class="widget">
+                            <div class="review ProReview">
+                                <img class="review-user" ng-src={{patientdetails.PatientDetails.Image}} onerror="this.src='assets/img/avatar.png';">
+                                <div class="review-content">
+                                    <h3><a href="">{{patientdetails.PatientDetails.Name}}</a></h3>
+                                    <p><i class="md-icon">phone-iphone</i> Phone : <span>{{patientdetails.PatientDetails.Mobile_number}}</span>
+                                    </p>
+                                    <p><i class="md-icon">add_location</i> Location : <span> {{patientdetails.PatientDetails.Address}} </span>
+                                    </p>
+                                    <p><i class="md-icon">email</i> Email : <span>{{patientdetails.PatientDetails.Email}} </span>
+                                    </p>
+                                    <p><i class="fa fa-male fa-lg" ng-if="patientdetails.PatientDetails.Gender == 'Male'"></i><i class="fa fa-female fa-lg" ng-if="patientdetails.PatientDetails.Gender == 'Female'"></i>&nbsp;&nbsp; Patient Code : <span>{{patientdetails.PatientDetails.PatientCode}} </span>
+                                    </p>
+                                    <p><i class="md-icon">card_giftcard</i> Date Of Birth : <span> {{patientdetails.PatientDetails.DOB.substr(8, 2)}}&sol;{{patientdetails.PatientDetails.DOB.substr(5, 2)}}&sol;{{patientdetails.PatientDetails.DOB.substr(0, 4)}} </span>
+                                    </p>
+                                    <a href="" class="btn btn-info" style="display: block; margin: 5px auto" data-toggle="modal" data-target="#notifimodal" ng-click="getnotifications()">Notifications</a>
+                                    <a href="" class="btn btn-primary pull-right EditIcon" ng-click="gotopage('edit')"><i class="md-icon">edit</i> Edit</a>
+                                </div>
+                            </div>
+                            <!-- /.review -->
+                        </div>
+                    </div>
+                    <!-- /.profile details -->
+                </div>
+                <!-- /.push-top-bottom -->
+            </div>
+            <!-- /.col-sm-9 -->
+            <div class="col-lg-9">
+                <div class="admin-stats">
+                    <div class="row" role="tablist">
+                        <div class="col-xs-4">
+                            <div class="admin-stat lime" style="cursor: pointer" aria-controls="medicalfile" data-target="#medicalfile" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="md-icon">insert_drive_file</i>
+                                </div>
+                                <!-- /.admin-stat-icon -->
+                                <div class="admin-stat-content">
+                                    <h2><a>Medical File</a></h2>
+                                </div>
+                                <!-- /.admin-stat-content -->
+                            </div>
+                            <!-- /.admin-stat -->
+                        </div>
+                        <!-- /.col-* -->
+                        <!--<div class="col-md-2 col-xs-4">
+                            <div class="admin-stat Orang" style="cursor: pointer" aria-controls="mypoints" data-target="#mypoints" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-plus-square FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2> <a>My points </a></h2>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!-- /.col-* -->
+                        <!--<div class="col-md-2 col-xs-4">
+                            <div class="admin-stat red" style="cursor: pointer" aria-controls="analysis" data-target="#analysis" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-flask FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a>Analysis</a></h2>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!-- /.col-* -->
+                        <!--<div class="col-md-2 col-xs-4">
+                            <div class="admin-stat blue" style="cursor: pointer" aria-controls="prescription" data-target="#prescription" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-stethoscope FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a>Medical visits</a></h2>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!-- /.col-* -->
+                        <div class="col-xs-4">
+                            <div class="admin-stat purple" style="cursor: pointer" aria-controls="appointment" data-target="#appointment" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-calendar-check-o FAicons"></i>
+                                </div>
+                                <!-- /.admin-stat-icon -->
+                                <div class="admin-stat-content">
+                                    <h2><a> My appointments</a></h2>
+                                </div>
+                                <!-- /.admin-stat-content -->
+                            </div>
+                            <!-- /.admin-stat -->
+                        </div>
+                        <!-- /.col-* -->
+                        <div class="col-xs-4">
+                            <div class="admin-stat brown" style="cursor: pointer" aria-controls="medicine" data-target="#medicine" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-medkit FAicons"></i>
+                                </div>
+                                <!-- /.admin-stat-icon -->
+                                <div class="admin-stat-content">
+                                    <h2><a>Medicine</a></h2>
+                                </div>
+                                <!-- /.admin-stat-content -->
+                            </div>
+                            <!-- /.admin-stat -->
+                        </div>
+                        <!-- /.col-* -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <div>
+                <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="medicalfile">
+                            <a href="" style="display: block; margin: auto" class="btn btn-primary" data-toggle="modal" data-target="#editprofilemodal"><i class="md-icon">edit</i> Edit</a>
+                            <div class="admin-box no-padding margin_10">
+                                <table class="table small-header">
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Value</th>
+                                            <th>Last Updates</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Height</td>
+                                            <td>{{patientprofile.Height}} cm</td>
+                                            <td> {{patientprofile.DOH.substr(8, 2)}}&sol;{{patientprofile.DOH.substr(5, 2)}}&sol;{{patientprofile.DOH.substr(0, 4)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Weigth</td>
+                                            <td>{{patientprofile.Weight}} KG</td>
+                                            <td> {{patientprofile.DOW.substr(8, 2)}}&sol;{{patientprofile.DOW.substr(5, 2)}}&sol;{{patientprofile.DOW.substr(0, 4)}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pressure</td>
+                                            <td>{{patientprofile.Pressure}}</td>
+                                            <td> {{patientprofile.DOP.substr(8, 2)}}&sol;{{patientprofile.DOP.substr(5, 2)}}&sol;{{patientprofile.DOP.substr(0, 4)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table -->
+                            </div>
+                            <div class="admin-box margin_10">
+                                <h5> My Notes</h5>
+                                <ul>
+                                    <li style="margin-bottom: 22px" ng-repeat="note in patientprofile.medicalNotes">{{note.Name}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--<div role="tabpanel" class="tab-pane" id="mypoints">
+                            <div class="admin-box margin_10 ">
+                                <h5> Total points <div class="pull-right HeaderPoints" >
+                                    <span class="points">150 point</span>
+                                    <a href="" class="btn btn-primary pull-right"><i class="md-icon">add</i> Add</a>
+                                    <a href="" class="btn btn-primary pull-right"><i class="md-icon">share</i> Share</a>
+                                </div></h5>
+                                <div style="width: 100%;     margin-bottom: 22px;">
+                                    <div class="text-xs-center" id="example-caption-4">Used in Alborg laboratory 75%</div>
+                                    <progress class="progress progress-striped progress-info progress-animated" value="25" max="100"></progress>
+                                </div>
+                                <div style="width: 100%;">
+                                    <div class="text-xs-center" id="example-caption-4">Used in Alfa laboratory 50%</div>
+                                    <progress class="progress progress-striped progress-success progress-animated" value="50" max="100"></progress>
+                                </div>
+                                <div style="width: 100%;">
+                                    <div class="text-xs-center" id="example-caption-4">Shared with user123 75%</div>
+                                    <progress class="progress progress-striped progress-danger progress-animated" value="75" max="100"></progress>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!--<div role="tabpanel" class="tab-pane" id="analysis">
+                            <div class="admin-box no-padding">
+                                <a href="" class="btn btn-primary pull-right"><i class="md-icon">add</i> Add</a>
+                                <table class="table small-header">
+                                    <thead>
+                                        <tr>
+                                            <th>Analysis</th>
+                                            <th>Lab</th>
+                                            <th>Last Updates</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>CBC</td>
+                                            <td>Al borg Laboratory</td>
+                                            <td> 12/08/2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td>BCR</td>
+                                            <td>Al mokhtabar Laboratory</td>
+                                            <td> 15/08/2017</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hemoglobin</td>
+                                            <td>Alfa Laboratory</td>
+                                            <td> 15/08/2017</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>-->
+                        <!--<div role="tabpanel" class="tab-pane" id="prescription">
+                            <div class="admin-reviews">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Doctor</th>
+                                            <th>Comment</th>
+                                            <th>Medicien</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="admin-reviews-profile">
+                                                    <img src="assets/img/tmp/profile-1.jpg" alt="">
+                                                    <div class="admin-reviews-profile-content">
+                                                        <span>Doctor name here</span>
+                                                        <div class="admin-reviews-rating">
+                                                            <i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
+                                                        </div>
+                                                        <div class="admin-reviews-date">
+                                                            17 march,2017
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-text">
+                                                    Eu sed apeirian moderatius, vocibus consectetuer ad quo, cum vidisse habemus vituperata ne. Similique temporibus delicatissimi in usu.
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-actions">
+                                                    <ul class="list">
+                                                        <li>Ansolina 70/30</li>
+                                                        <li>Nofalgin</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="admin-reviews-profile">
+                                                    <img src="assets/img/tmp/profile-1.jpg" alt="">
+                                                    <div class="admin-reviews-profile-content">
+                                                        <span>Doctor name here</span>
+                                                        <div class="admin-reviews-rating">
+                                                            <i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
+                                                        </div>
+                                                        <div class="admin-reviews-date">
+                                                            17 march,2017
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-text">
+                                                    Eu sed apeirian moderatius, vocibus consectetuer ad quo, cum vidisse habemus vituperata ne. Similique temporibus delicatissimi in usu.
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div class="admin-reviews-actions">
+                                                    <ul class="list">
+                                                        <li>Ansolina 70/30</li>
+                                                        <li>Nofalgin</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="admin-reviews-profile">
+                                                    <img src="assets/img/tmp/profile-1.jpg" alt="">
+
+                                                    <div class="admin-reviews-profile-content">
+                                                        <span>Doctor name here</span>
+
+                                                        <div class="admin-reviews-rating">
+                                                            <i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
+                                                        </div>
+                                                        <div class="admin-reviews-date">
+                                                            17 march,2017
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-text">
+                                                    Eu sed apeirian moderatius, vocibus consectetuer ad quo, cum vidisse habemus vituperata ne. Similique temporibus delicatissimi in usu.
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-actions">
+                                                    <ul class="list">
+                                                        <li>Ansolina 70/30</li>
+                                                        <li>Nofalgin</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="admin-reviews-profile">
+                                                    <img src="assets/img/tmp/profile-1.jpg" alt="">
+
+                                                    <div class="admin-reviews-profile-content">
+                                                        <span>Doctor name here</span>
+
+                                                        <div class="admin-reviews-rating">
+                                                            <i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
+                                                        </div>
+                                                        <div class="admin-reviews-date">
+                                                            17 march,2017
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-text">
+                                                    Eu sed apeirian moderatius, vocibus consectetuer ad quo, cum vidisse habemus vituperata ne. Similique temporibus delicatissimi in usu.
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="admin-reviews-actions">
+                                                    <ul class="list">
+                                                        <li>Ansolina 70/30</li>
+                                                        <li>Nofalgin</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>-->
+                        <div role="tabpanel" class="tab-pane" id="appointment">
+                            <div class="admin-box no-padding">
+                                <a href="" class="btn btn-primary pull-right" ng-click="gotopage('home_visit')"><i class="md-icon">add</i> Add</a>
+                                <p ng-if="patientappoint.length == 0">No appointments available</p>
+                                <table class="table small-header" ng-if="patientappoint.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Status</th>
+                                            <th>Appointment type</th>
+                                            <th>Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="appoint in patientappoint">
+                                            <td class="min-width"><img ng-src={{appoint.Image}} onerror="this.src='assets/img/tmp/profile-2.jpg';">
+                                            </td>
+                                            <td>Status: {{appoint.Status}}</td>
+                                            <td>{{appoint.Type}}&sol; {{appoint.Name}}</td>
+                                            <td> {{appoint.Date.substr(8, 2)}}&sol;{{appoint.Date.substr(5, 2)}}&sol;{{appoint.Date.substr(0, 4)}}</td>
+                                            <td>
+                                                <a href="" class="btn btn-secondary" ng-if="appoint.Status == 'Active' && appoint.Rate == 0" data-toggle="collapse" data-target="#ratecollapse{{appoint.Visit_ID}}"><i class="fa fa-star fa-lg"></i> Rate</a>
+                                                <div class="collapse" id="ratecollapse{{appoint.Visit_ID}}">
+                                                    <div class="well">
+                                                        <select ng-model="appointrating" style="min-width:70px">
+                                                            <option value="" disabled selected>Rate</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                    <button ng-click="rateappoint(appoint.Type, appoint.Visit_ID, appointrating)"> Save</button>
+                                                </div>
+                                                <div ng-if="appoint.Rate > 0">
+                                                    <i class="md-icon" style="color: gold" ng-if="appoint.Rate >= 1">star</i>
+                                                    <i class="md-icon" style="color: gold" ng-if="appoint.Rate >= 2">star</i>
+                                                    <i class="md-icon" style="color: gold" ng-if="appoint.Rate >= 3">star</i>
+                                                    <i class="md-icon" style="color: gold" ng-if="appoint.Rate >= 4">star</i>
+                                                    <i class="md-icon" style="color: gold" ng-if="appoint.Rate >= 5">star</i>
+                                                </div>
+                                                <hr style="margin: 5px 0">
+                                                <a href="" class="btn btn-secondary" ng-if="appoint.Status !== 'Cancel'" ng-click="cancelappoint(appoint.Visit_ID, appoint.Type)"><i class="md-icon">delete</i> Cancel</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table -->
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="medicine">
+                            <div class="admin-box no-padding">
+                                <a href="" class="btn btn-primary pull-right" data-toggle="modal" data-target="#newmed"><i class="md-icon">add</i> Add</a>
+                                <table class="table small-header">
+                                    <thead>
+                                        <tr>
+                                            <th>Medicine</th>
+                                            <th>Dosage</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="medicine in patientmedicine">
+                                            <td>{{medicine.Name}}</td>
+                                            <td>{{medicine.Dosage}} per Day</td>
+                                            <td><a href="" class="btn btn-primary pull-right" ng-click="updatemed(false, medicine.Medicine_ID, medicine.Name, medicine.Dosage)"><i class="md-icon">delete</i> Remove</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- /.table -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-->
+</div>
+<!-- /.content -->
+
+<!-- notification Modal -->
+<div class="modal fade" id="notifimodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Notifications</h4>
+      </div>
+      <div class="modal-body">
+        <div ng-if="patientnotifications.length == 0">No Notifications available right now</div>
+          <div ng-repeat="notifi in patientnotifications">{{notifi.Body}}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- edit profile Modal -->
+<div class="modal fade" id="editprofilemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit medical profile</h4>
+      </div>
+      <div class="modal-body">
+          <form ng-submit="editmprofile()">
+              <div class="form-group">
+                <label for="">Height</label>
+                <input type="text" class="form-control" ng-model="patientheight">
+            </div>
+              <div class="form-group">
+                <label for="">Weight</label>
+                <input type="text" class="form-control" ng-model="patientweight">
+            </div>
+              <div class="form-group">
+                <label for="">Pressure</label>
+                <input type="text" ng-model="patientpressure1">&sol;<input type="text" ng-model="patientpressure2">
+            </div>
+              <h6>Please select all that apply</h6>
+              <div ng-repeat="d in allnotes">
+                <input type="checkbox" ng-model="Selected" ng-click="setnotelist(Selected, d.ID)">
+                <label>{{d.Name}}</label>
+            </div>
+              <button class="btn btn-primary pull-right" type="submit">Save New Data</button>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+          <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add med Modal -->
+<div class="modal fade" id="newmed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add medication</h4>
+      </div>
+      <div class="modal-body">
+        <form ng-submit="updatemed(true, selectedmedid, selectedmedname, newmeddosage)">
+            <div class="form-group">
+                <label for="">Please enter medication name</label>
+                <input type="text" class="form-control" ng-model="medsearch" ng-keyup="findmed(medsearch)">
+            </div>
+            <div class="well" style="max-height: 150px; overflow: auto">
+                <b ng-if="foundmeds.length > 0">{{foundmeds.length}} Found</b>
+                <div href="" ng-repeat="med in foundmeds">
+                    {{med.Name}} <a href="" ng-click="selectmed(med.Name, med.Medicine_ID)">&lpar;Select&rpar;</a>
+                </div>
+                <div ng-if="foundmeds.length < 1">Nothing found</div>
+            </div>
+            <p>Selected Medication Name: {{selectedmedname}}</p>
+              <div class="form-group">
+                <label for="">Dosage</label>
+                <input type="text" class="form-control" ng-model="newmeddosage" required>
+            </div>
+            <button class="btn btn-primary" type="submit" ng-if="selectedmedid !== undifined">Add</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="content">
+    <!--<div class="admin-header-search">
+        <form method="get">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="md-icon">search</i>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter your search keyword ...">
+            </div>
+        </form>
+    </div>-->
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="admin-box row" style="height:300px">
+            <img class="review-user col-md-6" ng-src={{patientdetails.Image}} onerror="this.src='assets/img/avatar.png';" style="height: 250px; width: auto">
+            <div class="col-md-6">
+                <input type="file" id="editimage" name="myFile" />
+                <button class="btn btn-primary" ng-click="editpicture()">Change Profile Image</button>
+            </div>
+        </div>
+        <div class="admin-box">
+            <legend>Personal Information</legend>
+            <form ng-submit="editdetails()">
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Name">
+                </div>
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Address">
+                </div>
+                <div class="form-group">
+                    <label for="">Mobile Number</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Mobile_number">
+                </div>
+                <div class="form-group">
+                    <label for="">Gender</label>
+                    <select class="form-control" ng-model="patientdetails.Gender">
+                        <option value="" disabled selected>Male or Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Date of Birth</label>
+                    <select ng-model="dob1" style="min-width:70px">
+                        <option value="" disabled selected>Day</option>
+                        <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                    </select>
+                    &sol;
+                    <select ng-model="dob2" style="min-width:70px">
+                        <option value="" disabled selected>Month</option>
+                        <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                    </select>
+                    &sol;
+                    <select ng-model="dob3" style="min-width:70px">
+                        <option value="" disabled selected>Year</option>
+                        <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" ng-model="patientdetails.Email">
+                </div>
+                <button class="btn btn-primary pull-right" type="submit">Save New Data</button>
+                <button class="btn btn-default pull-right" ng-click="gotopage('profile')">Return to profile</button>
+            </form>
+        </div>
+        <!-- /.admin-box -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-->
+</div>
+<!-- /.content -->

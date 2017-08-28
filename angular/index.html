@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+    <link href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/libraries/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/leaflet.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/leaflet.markercluster.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/leaflet.markercluster.default.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" id="css-primary">
+    <!-- ************//// Designed by Aliaa Hosny  //// ************* -->
+    <title>Live-Healthy</title>
+    <script>
+        var apiurl = "http://yakensolution.cloudapp.net:80/LiveHealthy/api/",
+        language = "EN",
+        lang = "en";
+        function scrollWin() {
+            window.scrollTo(0, 0);
+        }
+    </script>
+</head>
+
+<body class="" ng-app="myApp">
+    <div class="page-wrapper">
+        <div class="header-wrapper" ng-controller="headerCtrl">
+            <div class="header">
+                <div class="header-inner">
+                    <div class="header-top">
+                        <div class="container">
+                            <a href="index.html">
+                                <img src="assets/img/logo.png" alt="" class="header-top-logo">
+                            </a>
+
+                            <div class="nav-primary-wrapper collapse navbar-toggleable-sm">
+                                <ul class="nav nav-pills ">
+                                    <li class="nav-item has-submenu">
+                                        <a href="" ng-click="gotopage('')" class="nav-link">Home</a>
+                                    </li>
+
+                                    <li class="nav-item has-submenu">
+                                        <a href="" ng-click="gotopage('about')" class="nav-link ">About</a>
+                                    </li>
+
+                                    <li class="nav-item has-submenu">
+                                        <a href="" ng-click="gotopage('t&c')" class="nav-link ">Terms and Conditions</a>
+                                    </li>
+
+                                    <li class="nav-item has-submenu">
+                                        <a href="" data-toggle="modal" data-target="#contactusModal" class="nav-link ">Contact us</a>
+                                    </li>
+                                    <li class="nav-item" ng-if="!islogedin">
+                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#loginmodal"> Login</a></span>
+                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#regmodal"> Register</a></span>
+                                        <!--<a href="" class="bg-Info"> Register as adoctor !</a>-->
+                                    </li>
+                                    <div ng-if="islogedin" style="display: inline-block; padding-left: 20px">
+                                        <li class="nav-item user-avatar-wrapper pull-right" style="display:inline-block">
+                                            <img class="nav-link circle user-avatar-image" ng-src={{patientdetails.PatientDetails.Image}} onerror="this.src='assets/img/avatar.png';" style="background-color: #fff">
+                                            <ul class="header-more-menu" style="z-index: 999">
+                                                <li><a href="" ng-click="gotopage('profile')">Profile</a>
+                                                </li>
+                                                <hr style="margin: 5px 0px">
+                                                <li ng-if="subprofiles.length < 2"><a href="" data-toggle="modal" data-target="#addsubmodal" >Add Sub-account</a>
+                                                </li>
+                                                <li ng-repeat="subpro in subprofiles"><a href="" ng-click="subprofileview(subpro.Patient_ID)">{{subpro.Patient_Name}}</a>
+                                                </li>
+                                                <hr style="margin: 5px 0px">
+                                                <li><a href="" ng-click="logout()">Logout</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                </ul>
+                                <!-- /.nav -->
+                            </div>
+                            <!-- /.nav-primary-wrapper -->
+
+                            <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target=".nav-primary-wrapper">
+                                <i class="md-icon">menu</i>
+                            </button>
+                        </div>
+                        <!-- /.container -->
+                    </div>
+                    <!-- /.header-top -->
+
+
+                    <div class="header-bottom">
+                        <div class="container">
+                            <div class="header-bottom-label hidden-md-down">
+                                I'm looking for
+                            </div>
+                            <!-- /.header-bottom-label -->
+
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Pharmacy</a>
+                                </li>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Radiology</a>
+                                </li>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">laboratories</a>
+                                </li>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Emergencies</a>
+                                </li>
+                                <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">Home visit</a>
+                                </li>
+                                <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">Doctors</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav -->
+
+                            <div class="header-bottom-more">
+                                <i class="md-icon">language</i>
+
+                                <ul class="header-more-menu">
+                                    <li><a href="index-ar.html">عربي</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.header-bottom-more -->
+                        </div>
+                        <!-- /.container -->
+                    </div>
+                    <!-- /.header-bottom -->
+
+                </div>
+                <!-- /.header-inner -->
+            </div>
+            <!-- /.header -->
+            <!--modals-->
+            <!-- login Modal -->
+            <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Log In Into Account</h4>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="nav nav-tabs" role="tablist" style="display: none">
+                                <li role="presentation" class="active"><a href="#loginform" aria-controls="loginform" role="tab" data-toggle="tab">Home</a></li>
+                                <li role="presentation"><a href="#forgetform" aria-controls="forgetform" role="tab" data-toggle="tab">Profile</a></li>
+                                <li role="presentation"><a href="#resetform" aria-controls="resetform" role="tab" data-toggle="tab">Messages</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="loginform">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-lg-8 col-lg-offset-2">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="">E-mail</label>
+                                                        <input type="text" class="form-control" ng-model="loginemail">
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                    <div class="form-group">
+                                                        <label for="">Password</label>
+                                                        <input type="text" class="form-control" ng-model="loginpass">
+                                                    </div>
+                                                    <!-- /.form-group -->
+                                                    <span ng-if="errorlogin" style="color: #01a796">{{errormsg}}</span>
+                                                    <div class="form-group-btn">
+                                                        <button type="submit" class="btn btn-primary pull-right" ng-click="loginup()">Sign In</button>
+                                                    </div>
+                                                    <!-- /.form-group-btn -->
+                                                    <div class="form-group-bottom-link">
+                                                        <a href="" data-target="#forgetform" aria-controls="forgetform" role="tab" data-toggle="tab">I forgot my password <i class="fa fa-long-arrow-right"></i></a>
+                                                    </div>
+                                                    <!-- /.form-group-bottom-link -->
+                                                    <p>or</p><button class="btn btn-info" ng-click="FBLogin()">Login Via Facebook</button>
+                                                </form>
+                                            </div>
+                                            <!-- /.col-* -->
+                                        </div>
+                                        <!-- /.row -->
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="forgetform">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="">E-mail Address</label>
+                                            <input type="text" class="form-control" required ng-model="forgetemail">
+                                        </div>
+                                        <p>{{forgeterrormsg}}</p>
+                                        <!-- /.form-group -->
+                                        <div class="form-group-btn">
+                                            <button type="submit" class="btn btn-primary btn-block" data-target="#resetform" aria-controls="resetform" role="tab" data-toggle="tab" ng-click="forgetpass()">Reset Password</button>
+                                        </div>
+                                        <!-- /.form-group-btn -->
+                                        <div class="form-group-bottom-link">
+                                            <a href=""><i class="fa fa-long-arrow-left"></i> Return back to login</a>
+                                        </div>
+                                        <!-- /.form-group-bottom-link -->
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="resetform">
+                                    <form ng-submit="resetpass()">
+                                        <div class="form-group">
+                                            <label for="">E-mail Address</label>
+                                            <input type="text" class="form-control" required ng-model="forgetemail">
+                                        </div>
+                                        <!-- /.form-group -->
+                                        <div class="form-group">
+                                            <label for="">Password</label>
+                                            <input type="password" class="form-control" required ng-model="newpass">
+                                        </div>
+                                        <!-- /.form-group -->
+                                        <div class="form-group">
+                                            <label for="">Verification Code sent to your email</label>
+                                            <input type="text" class="form-control" required ng-model="newvercode">
+                                        </div>
+                                        <!-- /.form-group -->
+                                        <div class="form-group-btn">
+                                            <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+                                        </div>
+                                        <p>{{vermessage}}</p>
+                                        <!-- /.form-group-btn -->
+                                        <div class="form-group-bottom-link">
+                                            <a href="" data-target="#loginform" aria-controls="loginform" role="tab" data-toggle="tab"><i class="fa fa-long-arrow-left"></i> Return back to login</a>
+                                        </div>
+                                        <!-- /.form-group-bottom-link -->
+                                    </form>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- contact us Modal -->
+            <div class="modal fade" id="contactusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Contact Us Form</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form ng-submit="contactusform()">
+                                <div class="form-group">
+                                    <label for="">Subject</label>
+                                    <input type="text" class="form-control" ng-model="contactsubject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" ng-model="contactemail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Messsage</label>
+                                    <textarea type="text" class="form-control" ng-model="contactmsg" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- registration Modal -->
+            <div class="modal fade" id="regmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Registration</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                        <button class="btn btn-info" ng-click="FBreg()">Sign Up Via Facebook</button>
+                                        <p ng-if="choosefacebook">Please complete your data for signup</p>
+                                        <p ng-if="!choosefacebook">Or normal sign up</p>
+                                        <div class="form-group">
+                                            <label for="">Username&ast;</label>
+                                            <input type="text" class="form-control" ng-model="regname" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">E-mail&ast;</label>
+                                            <input type="email" class="form-control" ng-model="regemail" required>
+                                        </div>
+                                        <div class="form-group" ng-if="!choosefacebook">
+                                            <label for="">Password&ast;</label>
+                                            <input type="password" class="form-control" ng-model="regpass" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Address</label>
+                                            <input type="text" class="form-control" ng-model="regadd">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Mobile Number</label>
+                                            <input type="text" class="form-control" ng-model="regmob">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Date of birth</label>
+                                            <select ng-model="dob1" style="min-width:70px">
+                                                <option value="" disabled selected>Day</option>
+                                                <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                            </select>
+                                            &sol;
+                                            <select ng-model="dob2" style="min-width:70px">
+                                                <option value="" disabled selected>Month</option>
+                                                <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                            </select>
+                                            &sol;
+                                            <select ng-model="dob3" style="min-width:70px">
+                                                <option value="" disabled selected>Year</option>
+                                                <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Gender</label>
+                                            <select class="form-control" ng-model="reggender">
+                                                <option value="" disabled selected>Male or Female</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <input type="file" id="regimage" name="myFile" />
+                                        <div class="center">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="tcagree"> By signing up, you agree with the <a href="" ng-click="gotopage('t&c')">terms and conditions</a>
+                                            </div>
+                                            <div class="form-group-btn">
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && !choosefacebook" ng-click=" register()">Create Account</button>
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && choosefacebook" ng-click=" fbregister()">Create Account using facebook</button>
+                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- add sub profile Modal -->
+            <div class="modal fade" id="addsubmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Add sub profile</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form ng-submit="subregister()">
+                                <div class="row">
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                        <div class="form-group">
+                                            <label for="">Username&ast;</label>
+                                            <input type="text" class="form-control" ng-model="subregname" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">E-mail&ast;</label>
+                                            <input type="email" class="form-control" ng-model="subregemail" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Password&ast;</label>
+                                            <input type="password" class="form-control" ng-model="subregpass" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Address</label>
+                                            <input type="text" class="form-control" ng-model="subregadd">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Mobile Number</label>
+                                            <input type="text" class="form-control" ng-model="subregmob">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Date of birth</label>
+                                            <select ng-model="subdob1" style="min-width:70px">
+                                                <option value="" disabled selected>Day</option>
+                                                <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                            </select>
+                                            &sol;
+                                            <select ng-model="subdob2" style="min-width:70px">
+                                                <option value="" disabled selected>Month</option>
+                                                <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                            </select>
+                                            &sol;
+                                            <select ng-model="subdob3" style="min-width:70px">
+                                                <option value="" disabled selected>Year</option>
+                                                <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Gender</label>
+                                            <select class="form-control" ng-model="subreggender">
+                                                <option value="" disabled selected>Male or Female</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        <input type="file" id="subregimage" name="myFile" />
+                                        <div class="center">
+                                            <div class="checkbox">
+                                                <input type="checkbox" ng-model="tcagree"> By signing up, you agree with the <a href="" ng-click="gotopage('t&c')">terms and conditions</a>
+                                            </div>
+                                            <div class="form-group-btn">
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree">Create Account</button>
+                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.header-wrapper -->
+
+        <div class="main-wrapper">
+            <div class="main">
+                <div class="main-inner">
+
+
+                    
+                    
+                    
+                    <div ng-view></div>
+                    
+                    
+                    
+                    
+                    
+                </div>
+                <!-- /.main-inner -->
+            </div>
+            <!-- /.main -->
+        </div>
+        <!-- /.main-wrapper -->
+
+        <div class="footer-wrapper" ng-controller="footerCtrl">
+            <div class="footer">
+                <div class="footer-widgets">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-3">
+                                <div class="widget right-border">
+                                    <h2 class="widgettitle">Why Live Healthy?</h2>
+
+                                    <p>
+                                        Mauris dictum, sem non pretium ultricies, dolor mi aliquet dolor, non facilisis arcu ligula vitae elit. Pellentesque ac varius sem. Sed pellentesque nisl vitae pellentesque consectetur.
+                                    </p>
+                                </div>
+                                <!-- /.widget -->
+                            </div>
+                            <!-- /.col-* -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
+                                <div class="widget right-border">
+                                    <h2 class="widgettitle">Social</h2>
+
+                                    <ul class="nav nav-stacked">
+                                        <li class="nav-item"><a href="" target="_blank" class="nav-link">Facebook</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" target="_blank" class="nav-link">Twitter</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" target="_blank" class="nav-link">LinkedIn</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" target="_blank" class="nav-link">Google Plus</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
+                                <div class="widget right-border">
+                                    <h2 class="widgettitle">You can search for</h2>
+
+                                    <ul class="nav nav-stacked">
+                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Pharmacy</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">Doctors</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">Home visit</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Laboratory</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+                            </div>
+                            <!-- /.col-* -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
+                                <div class="widget">
+                                    <h2 class="widgettitle">Pages</h2>
+
+                                    <ul class="nav nav-stacked">
+                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#joinusModal">Doctor? JOIN US</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('t&c')" class="nav-link">Terms and Conditions</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#contactusModal">Contact us</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+                            </div>
+                            <!-- /.col-* -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- /.footer-widgets -->
+
+
+                <div class="footer-bottom">
+                    <div class="container">
+                        <a href="" onclick="scrollWin()" class="footer-top-action">
+                            <i class="md-icon">vertical_align_top</i>
+                        </a>
+                        <!-- /.footer-top-action -->
+                        <div class="footer-bottom-left">
+                            - Created by <a href="http://www.yackeensolutions.com/" target="_blank">Y solutions</a>
+                        </div>
+                        <!-- /.footer-bottom-left -->
+
+                        <div class="footer-bottom-right">
+                            Copyright &copy; 2017 - All Rights Reserved
+                        </div>
+                        <!-- /.footer-bottom-right -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- /.footer-bottom -->
+            </div>
+            <!-- join us Modal -->
+            <div class="modal fade" id="joinusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Join Us Form</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form ng-submit="joinusform()">
+                                <div class="form-group">
+                                    <label for="">Location</label>
+                                    <input type="text" class="form-control" ng-model="joinLocation" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Address</label>
+                                    <input type="text" class="form-control" ng-model="joinAddress" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Doctor Name</label>
+                                    <input type="text" class="form-control" ng-model="joinDoctorName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Speciality</label>
+                                    <input type="text" class="form-control" ng-model="joinSpeciality" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Mobile Number</label>
+                                    <input type="text" class="form-control" ng-model="joinMobileNumber" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" ng-model="joinemail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Type</label>
+                                    <input type="text" class="form-control" ng-model="joinType" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Messsage</label>
+                                    <textarea type="text" class="form-control" ng-model="joinmsg" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- contact us Modal -->
+            <div class="modal fade" id="contactusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Contact Us Form</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form ng-submit="contactusform()">
+                                <div class="form-group">
+                                    <label for="">Subject</label>
+                                    <input type="text" class="form-control" ng-model="contactsubject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" ng-model="contactemail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Messsage</label>
+                                    <textarea type="text" class="form-control" ng-model="contactmsg" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.footer -->
+        </div>
+        <!-- /.footer-wrapper -->
+    </div>
+    <!-- /.page-wrapper -->
+
+
+
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/tether.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/leaflet.js"></script>
+    <script type="text/javascript" src="assets/js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="assets/libraries/owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- Angular and controller -->
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+    <script src="assets/js/angular-cookies.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+</body>
+<!-- ************//// Designed by Aliaa Hosny  //// ************* -->
+
+</html>

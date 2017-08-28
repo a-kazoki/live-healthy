@@ -1,0 +1,134 @@
+<div class="content">
+    <div class="content-title">
+        <div class="container">
+            <h1>Doctors </h1>
+            <ul class="breadcrumb">
+                <li><a href="index.html">Live Healthy</a> <i class="md-icon">keyboard_arrow_right</i>
+                </li>
+                <li class="active">Doctor search</li>
+            </ul>
+            <!-- /.breadcrumb -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="content">
+                    <div class="push-top-bottom">
+                        <div class="row">
+                            <div class="sidebar">
+                                <h4 ng-if="searchres.length == 0 || searchres == undefined">Nothing Found</h4>
+                                <div ng-if="searchres.length > 0">
+                                    <div class="widget" ng-repeat="res in searchres | filter:res.Doctor_ID == undifined">
+                                        <div class="review">
+                                            <a href="" class="review-user" style="background-image: url('assets/img/tmp/profile-2.jpg');"></a>
+
+                                            <div class="review-content">
+                                                <p ng-if="res.Doctor_ID != undifined">doctor</p>
+                                                <p ng-if="res.ClinicID != undifined">clinic</p>
+                                                <h3><a href="listing-detail.html">DR- Amr Samy  Elite Dental Clinic</a></h3>
+                                                <p class="ellipsis">Implants - Hollywood smile- Bleaching (Whiting) - Impacted wisdoms - Zirconium&amp;E- max Crowns - TMJ disorders - Root Canal T- Pedo </p>
+                                                <div class="review-rating"><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
+                                                </div>
+                                                <!-- /.review-rating -->
+                                                <p class="ellipsis">Heliopolis : 33 hassan aflatoun st.of el nozha st.in front of el rekaba al edara beside abdel kader fahmy hospital in front of Dar Al Ahly Bank behind City Stars( First floor above Michael's and Noheer pharmacy)</p>
+
+                                            </div>
+                                            <!-- /.review-content -->
+                                            <div class="card-actions">
+                                                <a href="listing-detail.html" class="card-action-icon"><i class="md-icon">favorite</i></a>
+                                                <a href="submit.html" class="card-action-icon"><i class="md-icon">book</i></a>
+                                                <a href="doctor-detail.html" class="card-action-btn btn btn-transparent">Show More</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.review -->
+                                    </div>
+                                    <!-- /.widget -->
+                                </div>
+                            </div>
+                            <!-- /.sidebar -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.push-top-bottom -->
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.col-* -->
+            <div class="col-md-6 col-lg-3">
+                <div class="page-header page-header-small paddng_Top">
+                </div>
+                <!-- /.page-header -->
+                <div class="filter">
+                    <form ng-submit="filter()">
+                        <div class="form-group col-xl-6">
+                            <label>Keyword</label>
+                            <input type="text" class="form-control" ng-model="name">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <select ng-model="city" class="form-control" ng-change="getarea(city)">
+                                <option value="" disabled selected>City</option>
+                                <option value="{{cty.City_ID}}" ng-repeat="cty in cities">{{cty.Name}}</option>
+                            </select>
+                            <select ng-model="area" class="form-control">
+                                <option value="" disabled selected>Area</option>
+                                <option value="{{area.Area_ID}}" ng-repeat="area in areas">{{area.Name}}</option>
+                            </select>
+                            <select class="form-control" ng-model="gender">
+                                <option value="" disabled selected>Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <select ng-model="rate" class="form-control">
+                                <option value="" disabled selected>Rate</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <select ng-model="speciality" class="form-control">
+                                <option value="" disabled selected>Specialities</option>
+                                <option value="{{special.Id}}" ng-repeat="special in specialists">{{special.Name}}</option>
+                            </select>
+                            <select ng-model="insurance" class="form-control">
+                                <option value="" disabled selected>Insurance</option>
+                                <option value="{{insur.ID}}" ng-repeat="insur in insurances">{{insur.Name}}</option>
+                            </select>
+                            <select class="form-control" ng-model="consult">
+                                <option value="" disabled selected>Consultancy</option>
+                                <option value="Specialist">Specialist</option>
+                                <option value="Consultant">Consultant</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-6">
+                                <label>Price From</label>
+                                <input type="text" class="form-control" ng-model="minprice">
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group col-xl-6">
+                                <label>Price To</label>
+                                <input type="text" class="form-control" ng-model="maxprice">
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.row -->
+                        <div class="form-group-btn form-group-btn-placeholder-gap">
+                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.filter -->
+            </div>
+            <!-- /.col-* -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content -->
