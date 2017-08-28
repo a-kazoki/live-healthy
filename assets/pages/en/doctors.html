@@ -28,7 +28,7 @@
                                         <div class="panel panel-default" ng-repeat="res in searchres | filter:{DTOType:1}">
                                             <div class="panel-heading" role="tab" id="headingOne">
                                                 <div class="review" style="margin: 0px; padding: 0px">
-                                                    <a href="" class="review-user" style="background-image: url('assets/img/tmp/profile-2.jpg');"></a>
+                                                    <img class="review-user" ng-src="{{res.Image}}" onerror="this.src='assets/img/1.jpg';" style="background-color: #fff">
                                                     <div class="review-content">
                                                         <p ng-if="res.Doctor_ID != undifined">doctor{{res.DTOType}}</p>
                                                         <p ng-if="res.ClinicID != undifined">clinic{{res.DTOType}}</p>
@@ -56,7 +56,7 @@
                                         <div class="panel panel-default" ng-repeat="res in searchres | filter:{DTOType:2}">
                                             <div class="panel-heading" role="tab" id="headingOne">
                                                 <div class="review" style="margin: 0px; padding: 0px">
-                                                    <a href="" class="review-user" style="background-image: url('assets/img/tmp/profile-2.jpg');"></a>
+                                                    <img class="review-user" ng-src="{{res.Image}}" onerror="this.src='assets/img/profile-2.jpg';" style="background-color: #fff">
                                                     <div class="review-content">
                                                         <p ng-if="res.Doctor_ID != undifined">doctor{{res.DTOType}}</p>
                                                         <p ng-if="res.ClinicID != undifined">clinic{{res.DTOType}}</p>
