@@ -21,32 +21,45 @@
                             <div class="sidebar">
                                 <h4 ng-if="searchres.length == 0 || searchres == undefined">Nothing Found</h4>
                                 <div ng-if="searchres.length > 0">
-                                    <div class="widget" ng-repeat="res in searchres | filter:res.Doctor_ID == undifined">
+<!--                      clinic              <div class="widget" ng-repeat="res in searchres | filter:{DTOType:1}">-->
+<!--                      doctor              <div class="widget" ng-repeat="res in searchres | filter:{DTOType:2}">-->
+                                    <!--<div class="widget" ng-repeat="res in searchres">
                                         <div class="review">
                                             <a href="" class="review-user" style="background-image: url('assets/img/tmp/profile-2.jpg');"></a>
-
                                             <div class="review-content">
-                                                <p ng-if="res.Doctor_ID != undifined">doctor</p>
-                                                <p ng-if="res.ClinicID != undifined">clinic</p>
+                                                <p ng-if="res.Doctor_ID != undifined">doctor{{res.DTOType}}</p>
+                                                <p ng-if="res.ClinicID != undifined">clinic{{res.DTOType}}</p>
                                                 <h3><a href="listing-detail.html">DR- Amr Samy  Elite Dental Clinic</a></h3>
                                                 <p class="ellipsis">Implants - Hollywood smile- Bleaching (Whiting) - Impacted wisdoms - Zirconium&amp;E- max Crowns - TMJ disorders - Root Canal T- Pedo </p>
                                                 <div class="review-rating"><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star</i><i class="md-icon">star_border</i>
                                                 </div>
-                                                <!-- /.review-rating -->
                                                 <p class="ellipsis">Heliopolis : 33 hassan aflatoun st.of el nozha st.in front of el rekaba al edara beside abdel kader fahmy hospital in front of Dar Al Ahly Bank behind City Stars( First floor above Michael's and Noheer pharmacy)</p>
 
                                             </div>
-                                            <!-- /.review-content -->
                                             <div class="card-actions">
                                                 <a href="listing-detail.html" class="card-action-icon"><i class="md-icon">favorite</i></a>
                                                 <a href="submit.html" class="card-action-icon"><i class="md-icon">book</i></a>
                                                 <a href="doctor-detail.html" class="card-action-btn btn btn-transparent">Show More</a>
                                             </div>
                                         </div>
-                                        <!-- /.review -->
-                                    </div>
-                                    <!-- /.widget -->
+                                    </div>-->
                                 </div>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default" ng-repeat="res in searchres">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="" data-target="#collapseOne{{res.Doctor_ID}}" aria-expanded="false" aria-controls="collapseOne">
+                    Collapsible Group Item #1
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne{{res.Doctor_ID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                Anim pariatur cliche reprehenderit,
+            </div>
+        </div>
+    </div>
+</div>
                             </div>
                             <!-- /.sidebar -->
                         </div>
