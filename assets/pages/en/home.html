@@ -16,16 +16,14 @@
 
         <div class="hero-form ">
             <div class="container">
-                <form>
-                    <div class="input-group first col-sm-12 col-md-4">
+                <form ng-submit="homesearch(homekeyword)">
+                    <!--<div class="input-group first col-sm-12 col-md-4">
                         <div class="input-group-addon">
                             <i class="md-icon">my_location</i>
                         </div>
-                        <!-- /.input-group-addon -->
 
-                        <input type="text" class="form-control" placeholder="Type your location">
-                    </div>
-                    <!-- /.input-group  -->
+                        <input type="text" class="form-control" placeholder="Type your location" ng-model="homelocation">
+                    </div>-->
 
                     <div class="input-group col-sm-12 col-md-6">
                         <div class="input-group-addon">
@@ -33,7 +31,7 @@
                         </div>
                         <!-- /.input-group-addon -->
 
-                        <input type="text" class="form-control" placeholder="Search for Doctors and Book appointments online, instantly">
+                        <input type="text" class="form-control" placeholder="Search for Doctors" ng-model="homekeyword">
                     </div>
                     <!-- /.input-group  -->
 
@@ -44,20 +42,20 @@
                 </form>
 
                 <div class="hero-form-sub">
-                    <strong class="hidden-sm-down">Or search by category</strong>
+                    <strong class="hidden-sm-down">Or explore by category</strong>
 
                     <ul>
-                        <li><a href="">Pharmacy</a>
+                        <li><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available">Pharmacy</a>
                         </li>
-                        <li><a href="">Radiology</a>
+                        <li><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available">Radiology</a>
                         </li>
-                        <li><a href="">laboratories</a>
+                        <li><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available">laboratories</a>
                         </li>
-                        <li><a href="">Emergencies</a>
+                        <li><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available">Emergencies</a>
                         </li>
-                        <li><a href="">Home visit</a>
+                        <li><a href="" ng-click="gotopage('home_visit')">Home visit</a>
                         </li>
-                        <li><a href="">Doctors</a>
+                        <li><a href="" ng-click="gotopage('doctors')">Doctors</a>
                         </li>
                     </ul>
                 </div>
@@ -81,7 +79,7 @@
                     </p>
                 </div>
                 <!-- /.page-title -->
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-4" ng-click="gotopage('doctors')">
                     <div class="content-box">
                         <div class="content-box-icon">
                             <i class="md-icon">room</i>
@@ -90,16 +88,12 @@
 
                         <h3>Search doctor, 24/7</h3>
 
-                        <p>
-                            No waiting; no hold music
-                        </p>
-
                     </div>
                     <!-- /.box -->
                 </div>
                 <!-- /.col-* -->
 
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-4" ng-click="gotopage('doctors')">
                     <div class="content-box">
                         <div class="content-box-icon">
                             <i class="md-icon">perm_identity</i>
@@ -108,16 +102,12 @@
 
                         <h3>Choose best practice</h3>
 
-                        <p>
-                            No waiting; no hold music
-                        </p>
-
                     </div>
                     <!-- /.box -->
                 </div>
                 <!-- /.col-* -->
 
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-4" ng-click="gotopage('home_visit')">
                     <div class="content-box">
                         <div class="content-box-icon">
                             <i class="md-icon">note_add</i>
@@ -126,30 +116,6 @@
                         <!-- /.content-box-icon -->
 
                         <h3>Book appointment</h3>
-
-                        <p>
-                            No waiting; no hold music
-
-                        </p>
-                    </div>
-                    <!-- /.box -->
-                </div>
-                <!-- /.col-* -->
-
-                <div class="col-sm-6 col-md-3">
-                    <div class="content-box">
-                        <div class="content-box-icon">
-                            <i class="md-icon">settings</i>
-                        </div>
-                        <!-- /.content-box-icon -->
-
-                        <h3>Review service</h3>
-
-                        <p>
-                            No waiting; no hold music
-
-                        </p>
-
                     </div>
                     <!-- /.box -->
                 </div>

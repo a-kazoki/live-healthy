@@ -441,7 +441,13 @@ myApp.controller("footerCtrl", ["$scope", "authFact", "$location", "$cookies", "
 //homeCtrl js
 myApp.controller("homeCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
-    
+    //goto page
+    $scope.gotopage = function (x) {$location.path("/" + x); };
+    //home search
+    $scope.homesearch = function (a) {
+        $cookies.putObject('searchkeyword', a);
+        $location.path("/doctors");
+    };
 }]);
 //t&cCtrl js
 myApp.controller("t&cCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
@@ -451,6 +457,33 @@ myApp.controller("t&cCtrl", ["$scope", "authFact", "$location", "$cookies", "$ht
 //doctorsCtrl js
 myApp.controller("doctorsCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
+    //search
+    $scope.filter = function () {
+        console.log(JSON.stringify({"City": $scope.city, "Area": $scope.area, "Rate": $scope.rate, "Gender": $scope.gender, "Speciality": $scope.speciality, "MaxPrice": $scope.maxprice, "MinPrice": $scope.minprice, "Name": $scope.name, "Insurance": $scope.insurance, "Consultancy": $scope.consult, "PageNumber": "1", "NumberRecords": "100", "lang": lang}));
+        $http({
+            method: "POST",
+            data: JSON.stringify({"City": $scope.city, "Area": $scope.area, "Rate": $scope.rate, "Gender": $scope.gender, "Speciality": $scope.speciality, "MaxPrice": $scope.maxprice, "MinPrice": $scope.minprice, "Name": $scope.name, "Insurance": $scope.insurance, "Consultancy": $scope.consult, "PageNumber": "1", "NumberRecords": "100", "lang": lang}),
+            url: apiurl + "Doctor/FilterDoctor",
+            headers: {
+                "UserID": JSON.parse($cookies.get("User_ID")),
+                "Token": JSON.parse($cookies.get("accessToken"))
+            }
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.searchres = response.data.Response.List;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    $scope.name = JSON.parse($cookies.get("searchkeyword"));
+    $cookies.putObject('searchkeyword', "");
+    $scope.filter();
     //get insurance
     $http({
         method: "GET",
@@ -525,30 +558,6 @@ myApp.controller("doctorsCtrl", ["$scope", "authFact", "$location", "$cookies", 
                 if (response.data.isSuccess) {
                     console.log(response.data.Response);
                     $scope.areas = response.data.Response.Areas;
-                } else {
-                    $scope.errormsg = response.data.errorMessage;
-                    console.log($scope.errormsg);
-                }
-            }, function (reason) {
-                console.log(reason.data);
-            });
-    };
-    //search
-    $scope.filter = function () {
-        console.log(JSON.stringify({"City": $scope.city, "Area": $scope.area, "Rate": $scope.rate, "Gender": $scope.gender, "Speciality": $scope.speciality, "MaxPrice": $scope.maxprice, "MinPrice": $scope.minprice, "Name": $scope.name, "Insurance": $scope.insurance, "Consultancy": $scope.consult, "PageNumber": "1", "NumberRecords": "100", "lang": lang}));
-        $http({
-            method: "POST",
-            data: JSON.stringify({"City": $scope.city, "Area": $scope.area, "Rate": $scope.rate, "Gender": $scope.gender, "Speciality": $scope.speciality, "MaxPrice": $scope.maxprice, "MinPrice": $scope.minprice, "Name": $scope.name, "Insurance": $scope.insurance, "Consultancy": $scope.consult, "PageNumber": "1", "NumberRecords": "100", "lang": lang}),
-            url: apiurl + "Doctor/FilterDoctor",
-            headers: {
-                "UserID": JSON.parse($cookies.get("User_ID")),
-                "Token": JSON.parse($cookies.get("accessToken"))
-            }
-        })
-            .then(function (response) {
-                if (response.data.isSuccess) {
-                    console.log(response.data.Response);
-                    $scope.searchres = response.data.Response.List;
                 } else {
                     $scope.errormsg = response.data.errorMessage;
                     console.log($scope.errormsg);
