@@ -481,9 +481,14 @@ myApp.controller("doctorsCtrl", ["$scope", "authFact", "$location", "$cookies", 
                 console.log(reason.data);
             });
     };
-    $scope.name = JSON.parse($cookies.get("searchkeyword"));
-    $cookies.putObject('searchkeyword', "");
-    $scope.filter();
+    //if already loged in
+    if ($cookies.get("searchkeyword") === undefined || $cookies.get("searchkeyword") === null || $cookies.get("searchkeyword") === "" || $cookies.get("searchkeyword") === " " || $cookies.get("searchkeyword") === "0") {
+        $scope.filter();
+    } else {
+        $scope.name = JSON.parse($cookies.get("searchkeyword"));
+        $cookies.putObject('searchkeyword', "");
+        $scope.filter();
+    }
     //get insurance
     $http({
         method: "GET",
@@ -558,6 +563,132 @@ myApp.controller("doctorsCtrl", ["$scope", "authFact", "$location", "$cookies", 
                 if (response.data.isSuccess) {
                     console.log(response.data.Response);
                     $scope.areas = response.data.Response.Areas;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //get clinic doctors
+    $scope.getclinicdoctors = function (x) {
+        console.log(x);
+        $scope.clinicdoctors = "";
+        if ($scope.city === null || $scope.city === undefined) {$scope.city = ""; }
+        if ($scope.area === null || $scope.area === undefined) {$scope.area = ""; }
+        if ($scope.rate === null || $scope.rate === undefined) {$scope.rate = ""; }
+        if ($scope.gender === null || $scope.gender === undefined) {$scope.gender = ""; }
+        if ($scope.speciality === null || $scope.speciality === undefined) {$scope.speciality = ""; }
+        if ($scope.maxprice === null || $scope.maxprice === undefined) {$scope.maxprice = ""; }
+        if ($scope.minprice === null || $scope.minprice === undefined) {$scope.minprice = ""; }
+        if ($scope.name === null || $scope.name === undefined) {$scope.name = ""; }
+        if ($scope.insurance === null || $scope.insurance === undefined) {$scope.insurance = ""; }
+        if ($scope.consult === null || $scope.consult === undefined) {$scope.consult = ""; }
+        $http({
+            method: "GET",
+            url: apiurl + "Doctor/GetClinicDoctors?Clinic_ID=" + x + "&City=" + $scope.city + "&Area=" + $scope.area + "&Rate=" + $scope.rate + "&Gender=" + $scope.gender + "&Speciality=" + $scope.speciality + "&MaxPrice=" + $scope.maxprice + "&MinPrice=" +  $scope.minprice + "&Name=" + $scope.name + "&Insurance=" + $scope.insurance + "&Consultancy=" + $scope.consult + "&PageNumber=1&NumberRecords=100&lang=" + lang,
+            headers: {
+                "UserID": JSON.parse($cookies.get("User_ID")),
+                "Token": JSON.parse($cookies.get("accessToken"))
+            }
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.clinicdoctors = response.data.Response.List;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //get doctor clinics
+    $scope.getdoctorclinics = function (x) {
+        console.log(x);
+        $scope.doctorclinics = "";
+        if ($scope.city === null || $scope.city === undefined) {$scope.city = ""; }
+        if ($scope.area === null || $scope.area === undefined) {$scope.area = ""; }
+        if ($scope.rate === null || $scope.rate === undefined) {$scope.rate = ""; }
+        if ($scope.gender === null || $scope.gender === undefined) {$scope.gender = ""; }
+        if ($scope.speciality === null || $scope.speciality === undefined) {$scope.speciality = ""; }
+        if ($scope.maxprice === null || $scope.maxprice === undefined) {$scope.maxprice = ""; }
+        if ($scope.minprice === null || $scope.minprice === undefined) {$scope.minprice = ""; }
+        if ($scope.name === null || $scope.name === undefined) {$scope.name = ""; }
+        if ($scope.insurance === null || $scope.insurance === undefined) {$scope.insurance = ""; }
+        if ($scope.consult === null || $scope.consult === undefined) {$scope.consult = ""; }
+        $http({
+            method: "GET",
+            url: apiurl + "Doctor/GetDoctorClinics?Doctor_ID=" + x + "&City=" + $scope.city + "&Area=" + $scope.area + "&Rate=" + $scope.rate + "&Gender=" + $scope.gender + "&Speciality=" + $scope.speciality + "&MaxPrice=" + $scope.maxprice + "&MinPrice=" +  $scope.minprice + "&Name=" + $scope.name + "&Insurance=" + $scope.insurance + "&Consultancy=" + $scope.consult + "&PageNumber=1&NumberRecords=100&lang=" + lang,
+            headers: {
+                "UserID": JSON.parse($cookies.get("User_ID")),
+                "Token": JSON.parse($cookies.get("accessToken"))
+            }
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.doctorclinics = response.data.Response.Clinics;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //booking ready
+    $scope.prebooking = function (x, y, z, w) {
+        $scope.selecteddoctorid = z;
+        $scope.selecteddoctorname = w;
+        $scope.selectedclinicid = x;
+        $scope.selectedclinicname = y;
+        console.log($scope.selecteddoctorid);
+        console.log($scope.selecteddoctorname);
+        console.log($scope.selectedclinicid);
+        console.log($scope.selectedclinicname);
+        $scope.bookingconfirm = false;
+        $http({
+            method: "GET",
+            url: apiurl + "Doctor/DoctorTimes?Doctor_ID=" + $scope.selecteddoctorid + "&Clinic_ID=" + $scope.selectedclinicid + "&lang=" + lang,
+            headers: {
+                "UserID": JSON.parse($cookies.get("User_ID")),
+                "Token": JSON.parse($cookies.get("accessToken"))
+            }
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response.Days);
+                    $scope.bookingdays = response.data.Response.Days;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //book doctor and clinic
+    $scope.booking = function () {
+        console.log($scope.selecteddoctorid);
+        console.log($scope.selecteddoctorname);
+        console.log($scope.selectedclinicid);
+        console.log($scope.selectedclinicname);
+        $http({
+            method: "POST",
+            data: JSON.stringify({"Patient_ID": JSON.parse($cookies.get("Patient_ID")), "Doctor_ID": $scope.selecteddoctorid, "Visit_Date": $scope.vdate, "Visit_Info": $scope.vinfo, "Clinic_ID": $scope.selectedclinicid, "lang": lang}),
+            url: apiurl + "Order/DoctorVisit",
+            headers: {
+                "UserID": JSON.parse($cookies.get("User_ID")),
+                "Token": JSON.parse($cookies.get("accessToken"))
+            }
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.bookingconfirm = true;
                 } else {
                     $scope.errormsg = response.data.errorMessage;
                     console.log($scope.errormsg);
