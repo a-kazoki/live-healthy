@@ -1,4 +1,5 @@
-<section style="min-height: 400px" class="text-center" ng-if="!isdoctor && !isreservation && !isnotfound">
+<section style="min-height: 400px" class="text-center" ng-if="!docupdate && !isnotfound">
     <h2>One Moment Please And You Will Be Re-directed</h2>
 </section>
 <div ng-include="'assets/pages/en/404.html'" ng-if="isnotfound"></div>
+<div ng-include="'assets/pages/en/doctorupdate.html'" ng-if="docupdate"></div>

@@ -1,0 +1,317 @@
+<div class="content">
+    <div class="content-title">
+        <div class="container">
+            <h1>Home Visit</h1>
+
+            <ul class="breadcrumb">
+                <li><a href="index-ar.html">ليف هيلثي</a> <i class="md-icon">keyboard_arrow_right</i>
+                </li>
+                <li class="active">الزيارة المنزلية</li>
+            </ul>
+            <!-- /.breadcrumb -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-offset-2">
+                <div class="admin-stats">
+                    <div class="row" role="tablist">
+                        <div class="col-md-offset-2 col-md-2 col-xs-3">
+                            <div class="admin-stat Hicon" data-target="#Doctor" aria-controls="Doctor" role="tab" data-toggle="tab" style="cursor: pointer">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-flask FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a href="">طبيب</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-3">
+                            <div class="admin-stat Hicon" style="cursor: pointer" data-target="#Nurse" aria-controls="Nurse" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-stethoscope FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a href="">تمريض</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-3">
+                            <div class="admin-stat Hicon" style="cursor: pointer" data-target="#Lab" aria-controls="Lab" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-medkit FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a href="">معمل تحاليل</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-3">
+                            <div class="admin-stat Hicon" style="cursor: pointer" data-target="#Radiology" aria-controls="Radiology" role="tab" data-toggle="tab">
+                                <div class="admin-stat-icon">
+                                    <i class="fa fa-medkit FAicons"></i>
+                                </div>
+                                <div class="admin-stat-content">
+                                    <h2><a href="">اشعة</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="Doctor">
+                        <div class="admin-box no-padding">
+                           <div class="box">
+                                <form ng-submit="housevisit(hvnmae, hvnumber, hvday, hvmonth, hvyear, hvhour, hvmin, hvinfo, 'Doctor', hvadd, hvspecial, hvtest)">
+                                    <div class="form-group">
+                                        <label for="">المدينة</label>
+                                        <select ng-model="selectedcity" style="min-width:70px" class="form-control" required ng-change="getarea(selectedcity)">
+                                            <option value="" disabled selected>المدينة</option>
+                                            <option value="{{cty.City_ID}}" ng-repeat="cty in cities">{{cty.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">المنطقة</label>
+                                        <select ng-model="selectedarea" style="min-width:70px" class="form-control" required ng-change="getspetial(selectedarea)">
+                                            <option value="" disabled selected>المنطقة</option>
+                                            <option value="{{area.Area_ID}}" ng-repeat="area in areas">{{area.Name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">التخصص</label>
+                                        <select ng-model="hvspecial" style="min-width:70px" class="form-control" required>
+                                            <option value="" disabled selected>التخصص</option>
+                                            <option value="{{special.Name}}" ng-repeat="special in speciality">{{special.Name}} &lpar;Price&#58;{{special.Price}}&rpar;</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">الاسم</label>
+                                        <input type="text" class="form-control" ng-model="hvnmae" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">العنوان</label>
+                                        <input type="text" class="form-control" ng-model="hvadd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">رقم المحمول</label>
+                                        <input type="text" class="form-control" ng-model="hvnumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">تاريخ الزيارة</label>
+                                        <select ng-model="hvday" style="min-width:70px" required>
+                                            <option value="" disabled selected>اليوم</option>
+                                            <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvmonth" style="min-width:70px" required>
+                                            <option value="" disabled selected>الشهر</option>
+                                            <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvyear" style="min-width:70px" required>
+                                            <option value="" disabled selected>السنة</option>
+                                            <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">موعد الزيارة</label>
+                                        <select ng-model="hvhour" style="min-width:70px" required>
+                                            <option value="" disabled selected>الساعة</option>
+                                            <option value="{{h}}" ng-repeat="h in hourinday">{{h}}</option>
+                                        </select>
+                                        &colon;
+                                        <select ng-model="hvmin" style="min-width:70px" required>
+                                            <option value="" disabled selected>الدقيقة</option>
+                                            <option value="{{min}}" ng-repeat="min in mininhour">{{min}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">ملاحظات</label>
+                                        <textarea type="text" class="form-control" ng-model="hvinfo"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">سجل طلب زيارة</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="Nurse">
+                        <div class="admin-box no-padding">
+                           <div class="box">
+                               <h5>سعر الزيارة المنزلية للتمريض&colon; {{nurseprice}}</h5>
+                                <form ng-submit="housevisit(hvnmae, hvnumber, hvday, hvmonth, hvyear, hvhour, hvmin, hvinfo, 'Nurse', hvadd, hvspecial, hvtest)">
+                                    <div class="form-group">
+                                        <label for="">الاسم</label>
+                                        <input type="text" class="form-control" ng-model="hvnmae" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">العنوان</label>
+                                        <input type="text" class="form-control" ng-model="hvadd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">رقم المحمول</label>
+                                        <input type="text" class="form-control" ng-model="hvnumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">تاريخ الزيارة</label>
+                                        <select ng-model="hvday" style="min-width:70px" required>
+                                            <option value="" disabled selected>اليوم</option>
+                                            <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvmonth" style="min-width:70px" required>
+                                            <option value="" disabled selected>الشهر</option>
+                                            <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvyear" style="min-width:70px" required>
+                                            <option value="" disabled selected>السنة</option>
+                                            <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">وقت الزيارة</label>
+                                        <select ng-model="hvhour" style="min-width:70px" required>
+                                            <option value="" disabled selected>الساعة</option>
+                                            <option value="{{h}}" ng-repeat="h in hourinday">{{h}}</option>
+                                        </select>
+                                        &colon;
+                                        <select ng-model="hvmin" style="min-width:70px" required>
+                                            <option value="" disabled selected>الدقيقة</option>
+                                            <option value="{{min}}" ng-repeat="min in mininhour">{{min}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">ملاحظات</label>
+                                        <textarea type="text" class="form-control" ng-model="hvinfo"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">سجل طلب زيارة</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="Lab">
+                        <div class="admin-box no-padding">
+                           <div class="box">
+                                <form ng-submit="housevisit(hvnmae, hvnumber, hvday, hvmonth, hvyear, hvhour, hvmin, hvinfo, 'Lab', hvadd, hvspecial, hvtest)">
+                                    <div class="form-group">
+                                        <label for="">الاسم</label>
+                                        <input type="text" class="form-control" ng-model="hvnmae" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">العنوان</label>
+                                        <input type="text" class="form-control" ng-model="hvadd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">رقم المحمول</label>
+                                        <input type="text" class="form-control" ng-model="hvnumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">اسم التحليل</label>
+                                        <input type="text" class="form-control" ng-model="hvtest" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">تاريخ الزيارة</label>
+                                        <select ng-model="hvday" style="min-width:70px" required>
+                                            <option value="" disabled selected>اليوم</option>
+                                            <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvmonth" style="min-width:70px" required>
+                                            <option value="" disabled selected>الشهر</option>
+                                            <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvyear" style="min-width:70px" required>
+                                            <option value="" disabled selected>السنة</option>
+                                            <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">موعد الزيارة</label>
+                                        <select ng-model="hvhour" style="min-width:70px" required>
+                                            <option value="" disabled selected>Hour</option>
+                                            <option value="{{h}}" ng-repeat="h in hourinday">{{h}}</option>
+                                        </select>
+                                        &colon;
+                                        <select ng-model="hvmin" style="min-width:70px" required>
+                                            <option value="" disabled selected>Minute</option>
+                                            <option value="{{min}}" ng-repeat="min in mininhour">{{min}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Message &lpar;notes&rpar;</label>
+                                        <textarea type="text" class="form-control" ng-model="hvinfo"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">سجل طلب زيارة</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="Radiology">
+                        <div class="admin-box no-padding">
+                           <div class="box">
+                                <form ng-submit="housevisit(hvnmae, hvnumber, hvday, hvmonth, hvyear, hvhour, hvmin, hvinfo, 'Riadology', hvadd, hvspecial, hvtest)">
+                                    <div class="form-group">
+                                        <label for="">Name</label>
+                                        <input type="text" class="form-control" ng-model="hvnmae" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Address</label>
+                                        <input type="text" class="form-control" ng-model="hvadd" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Mobile Number</label>
+                                        <input type="text" class="form-control" ng-model="hvnumber" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Test name</label>
+                                        <input type="text" class="form-control" ng-model="hvtest" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Visit Date</label>
+                                        <select ng-model="hvday" style="min-width:70px" required>
+                                            <option value="" disabled selected>Day</option>
+                                            <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvmonth" style="min-width:70px" required>
+                                            <option value="" disabled selected>Month</option>
+                                            <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                                        </select>
+                                        &sol;
+                                        <select ng-model="hvyear" style="min-width:70px" required>
+                                            <option value="" disabled selected>Year</option>
+                                            <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Visit Time</label>
+                                        <select ng-model="hvhour" style="min-width:70px" required>
+                                            <option value="" disabled selected>Hour</option>
+                                            <option value="{{h}}" ng-repeat="h in hourinday">{{h}}</option>
+                                        </select>
+                                        &colon;
+                                        <select ng-model="hvmin" style="min-width:70px" required>
+                                            <option value="" disabled selected>Minute</option>
+                                            <option value="{{min}}" ng-repeat="min in mininhour">{{min}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Message &lpar;notes&rpar;</label>
+                                        <textarea type="text" class="form-control" ng-model="hvinfo"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">سجل طلب زيارة</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-->
+</div>
+<!-- /.content -->

@@ -1,0 +1,229 @@
+<div class="content">
+    <div class="content-title">
+        <div class="container">
+            <h1>الاطباء </h1>
+            <ul class="breadcrumb">
+                <li><a href="index-ar.html">ليف هيلثي</a> <i class="md-icon">keyboard_arrow_right</i>
+                </li>
+                <li class="active">البحث عن اطباء</li>
+            </ul>
+            <!-- /.breadcrumb -->
+        </div>
+        <!-- /.container -->
+    </div>
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="content">
+                    <div class="push-top-bottom">
+                        <div class="row">
+                            <div class="sidebar">
+                                <h4 ng-if="searchres.length == 0 || searchres == undefined">لم نجد شيئ</h4>
+                                <div ng-if="searchres.length > 0">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <h3>العيادات</h3>
+                                        <div class="panel panel-default" ng-repeat="res in searchres | filter:{DTOType:1}">
+                                            <div class="panel-heading" role="tab" id="headingOne" style="min-height: 200px">
+                                                <div class="review" style="margin: 0px; padding: 0px">
+                                                    <img class="review-user" ng-src="{{res.Image}}" onerror="this.src='assets/img/1.jpg';" style="background-color: #fff">
+                                                    <div class="review-content">
+                                                        <h3>عيادة- {{res.Name}}</h3>
+                                                        <p class="ellipsis">{{res.City}}, {{res.Area}}</p>
+                                                        <p class="ellipsis">{{res.Address}}</p>
+                                                        <div class="review-rating">
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 1">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 2">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 3">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 4">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 5">star</i>
+                                                        </div>
+                                                        <p class="ellipsis">الرقم الارضي: {{res.Land_Line}}</p>
+                                                        <p class="ellipsis">رقم المحمول: {{res.MobileNumber}}</p>
+                                                        <p class="ellipsis">السعر: {{res.Price}}</p>
+                                                    </div>
+                                                    <div class="card-actions">
+                                                        <a class="card-action-btn btn btn-transparent" data-toggle="collapse" data-parent="#accordion" href="" data-target="#collapseOne{{res.ClinicID}}" aria-expanded="false" aria-controls="collapseOne" ng-click="getclinicdoctors(res.ClinicID)">استكشف الاطباء</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapseOne{{res.ClinicID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                <div class="panel-body">
+                                                    <div class="well row" style="min-height: 80px; padding: 5px; margin: 0px" ng-repeat="doc in clinicdoctors">
+                                                        <div class="col-md-4">
+                                                            <img class="review-user" ng-src="{{doc.Image}}" onerror="this.src='assets/img/1.jpg';" style="height: 60px; width: auto">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="ellipsis">الطبيب- {{doc.Name}}</p>
+                                                            <p class="ellipsis">التخصص- {{doc.Speciality}}</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button class="btn btn-primary" ng-click="prebooking(res.ClinicID, res.Name, doc.Doctor_ID, doc.Name)" data-toggle="modal" data-target="#bookmodal"><i class="md-icon">book</i>الحجز</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3>الاطباء</h3>
+                                        <div class="panel panel-default" ng-repeat="res in searchres | filter:{DTOType:2}">
+                                            <div class="panel-heading" role="tab" id="headingOne" style="min-height: 200px">
+                                                <div class="review" style="margin: 0px; padding: 0px">
+                                                    <img class="review-user" ng-src="{{res.Image}}" onerror="this.src='assets/img/profile-2.jpg';" style="background-color: #fff">
+                                                    <div class="review-content">
+                                                        <h3>الطبيب- {{res.Name}}</h3>
+                                                        <p class="ellipsis">{{res.Speciality}} </p>
+                                                        <div class="review-rating">
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 1">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 2">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 3">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 4">star</i>
+                                                            <i class="md-icon" style="color: gold" ng-if="res.Rate >= 5">star</i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-actions">
+                                                        <a class="card-action-btn btn btn-transparent" data-toggle="collapse" data-parent="#accordion" href="" data-target="#collapseOne{{res.Doctor_ID}}" aria-expanded="false" aria-controls="collapseOne" ng-click="getdoctorclinics(res.Doctor_ID)">استكشف للحجز</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="collapseOne{{res.Doctor_ID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                <div class="panel-body">
+                                                    <div class="well row" style="min-height: 80px; padding: 5px; margin: 0px" ng-repeat="cli in doctorclinics">
+                                                        <div class="col-md-4">
+                                                            <p class="ellipsis">عيادة: {{cli.Name}}</p>
+                                                            <p class="ellipsis">{{cli.City_Name}}, {{cli.Area_Name}}</p>
+                                                            <p class="ellipsis">{{cli.Address}}</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p class="ellipsis">رقم المحمول: {{cli.Mobile_Number}}</p>
+                                                            <p class="ellipsis">الرقم الارضي: {{cli.Land_Line}}</p>
+                                                            <p class="ellipsis">السعر: {{cli.Price}}</p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button class="btn btn-primary" ng-click="prebooking(cli.Clinic_ID, cli.Name, res.Doctor_ID, res.Name)" data-toggle="modal" data-target="#bookmodal"><i class="md-icon">book</i>الحجز</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- /.sidebar -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.push-top-bottom -->
+                </div>
+                <!-- /.content -->
+            </div>
+            <!-- /.col-* -->
+            <div class="col-md-6 col-lg-3">
+                <div class="page-header page-header-small paddng_Top">
+                </div>
+                <!-- /.page-header -->
+                <div class="filter">
+                    <form ng-submit="filter()">
+                        <div class="form-group col-xl-6">
+                            <label>كلمة البحث</label>
+                            <input type="text" class="form-control" ng-model="name">
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="city" class="form-control" ng-change="getarea(city)">
+                                <option value="" selected>البلد</option>
+                                <option value="{{cty.City_ID}}" ng-repeat="cty in cities">{{cty.Name}}</option>
+                            </select>
+                            <select ng-model="area" class="form-control">
+                                <option value="" selected>المنطقة</option>
+                                <option value="{{area.Area_ID}}" ng-repeat="area in areas">{{area.Name}}</option>
+                            </select>
+                            <select class="form-control" ng-model="gender">
+                                <option value="" selected>الجنس</option>
+                                <option value="Male">ذكر</option>
+                                <option value="Female">انثى</option>
+                            </select>
+                            <select ng-model="rate" class="form-control">
+                                <option value="" selected>التقييم</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <select ng-model="speciality" class="form-control">
+                                <option value="" selected>التخصص</option>
+                                <option value="{{special.Id}}" ng-repeat="special in specialists">{{special.Name}}</option>
+                            </select>
+                            <select ng-model="insurance" class="form-control">
+                                <option value="" selected>التأمين</option>
+                                <option value="{{insur.ID}}" ng-repeat="insur in insurances">{{insur.Name}}</option>
+                            </select>
+                            <select class="form-control" ng-model="consult">
+                                <option value="" selected>الدرجة العلمية</option>
+                                <option value="Specialist">مختص</option>
+                                <option value="Consultant">استشاري</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-6">
+                                <label>السعر من</label>
+                                <input type="text" class="form-control" ng-model="minprice">
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group col-xl-6">
+                                <label>السعر حتى</label>
+                                <input type="text" class="form-control" ng-model="maxprice">
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.row -->
+                        <div class="form-group-btn form-group-btn-placeholder-gap">
+                            <button type="submit" class="btn btn-primary btn-block">البحث</button>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.filter -->
+            </div>
+            <!-- /.col-* -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.content -->
+<!-- visit Modal -->
+<div class="modal fade" id="bookmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">حجز الطبيب</h4>
+            </div>
+            <div class="modal-body">
+                <div class="well">
+                    <p><b>الطبيب: </b>{{selecteddoctorname}}</p>
+                    <p><b>في عيادة: </b>{{selectedclinicname}}</p>
+                    <form ng-submit="booking()">
+                        <div class="form-group">
+                            <label for="">مواعيد الزيارة</label>
+                            <select ng-model="vdate" class="form-control" required>
+                                <option value="" disabled selected>الجدول</option>
+                                <option value="{{day.Day}} {{day.From_Hour}}" ng-repeat="day in bookingdays">{{day.Day}}, {{day.From_Hour}}, {{day.To_Hour}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">ملاحظات</label>
+                            <textarea type="text" class="form-control" ng-model="vinfo"></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit" ng-if="!bookingconfirm">تئكيد التسجيل</button>
+                        <p ng-if="bookingconfirm">تم تئكيد الحجز</p>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+            </div>
+        </div>
+    </div>
+</div>

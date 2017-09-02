@@ -1,0 +1,74 @@
+<div class="content">
+    <!--<div class="admin-header-search">
+        <form method="get">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="md-icon">search</i>
+                </div>
+                <input type="text" class="form-control" placeholder="Enter your search keyword ...">
+            </div>
+        </form>
+    </div>-->
+    <!-- /.content-title -->
+    <div class="container">
+        <div class="admin-box row" style="height:300px">
+            <img class="review-user col-md-6" ng-src={{patientdetails.Image}} onerror="this.src='assets/img/avatar.png';" style="height: 250px; width: auto">
+            <div class="col-md-6">
+                <input type="file" id="editimage" name="myFile" />
+                <button class="btn btn-primary" ng-click="editpicture()">تغير صورة الشخصية</button>
+            </div>
+        </div>
+        <div class="admin-box">
+            <legend>البينات الشخصية</legend>
+            <form ng-submit="editdetails()">
+                <div class="form-group">
+                    <label for="">الاسم</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Name">
+                </div>
+                <div class="form-group">
+                    <label for="">العنوان</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Address">
+                </div>
+                <div class="form-group">
+                    <label for="">رقم المحمول</label>
+                    <input type="text" class="form-control" ng-model="patientdetails.Mobile_number">
+                </div>
+                <div class="form-group">
+                    <label for="">الجنس</label>
+                    <select class="form-control" ng-model="patientdetails.Gender">
+                        <option value="" disabled selected>الجنس</option>
+                        <option value="Male">ذكر</option>
+                        <option value="Female">انثى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">تاريخ الميلاد</label>
+                    <select ng-model="dob1" style="min-width:70px">
+                        <option value="" disabled selected>اليوم</option>
+                        <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
+                    </select>
+                    &sol;
+                    <select ng-model="dob2" style="min-width:70px">
+                        <option value="" disabled selected>الشهر</option>
+                        <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
+                    </select>
+                    &sol;
+                    <select ng-model="dob3" style="min-width:70px">
+                        <option value="" disabled selected>السنة</option>
+                        <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">البريد الالكتروني</label>
+                    <input type="email" class="form-control" ng-model="patientdetails.Email">
+                </div>
+                <button class="btn btn-primary pull-right" type="submit">تسجيل البيانات الجديدة</button>
+                <button class="btn btn-default pull-right" ng-click="gotopage('profile')">العودة للصفحة الشخصية</button>
+            </form>
+        </div>
+        <!-- /.admin-box -->
+        <!-- /.row -->
+    </div>
+    <!-- /.container-->
+</div>
+<!-- /.content -->

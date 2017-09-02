@@ -3,8 +3,9 @@
 var myApp = angular.module("myApp", ["ngRoute", "ngCookies"]);
 
 //routes js
-myApp.config(["$routeProvider", function ($routeProvider) {
+myApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
     "use strict";
+    $locationProvider.hashPrefix('');
     $routeProvider
         .when("/", {
             templateUrl : "assets/pages/" + lang + "/home.html",
@@ -1550,7 +1551,11 @@ myApp.controller("subprofileCtrl", ["$scope", "authFact", "$location", "$cookies
 myApp.controller("redirectCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
     var locationurl = window.location.href;
-    $scope.isnotfound = true;// required url not found
+    if (locationurl.indexOf("DoctorUpdate") >= 0) {
+        $scope.docupdate = true;// required url not found
+    } else {
+        $scope.isnotfound = true;// required url not found
+    }
 }]);
 //404Ctrl js
 myApp.controller("404Ctrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
@@ -1558,8 +1563,8 @@ myApp.controller("404Ctrl", ["$scope", "authFact", "$location", "$cookies", "$ht
     //home page
     $scope.homepage = function () {$location.path("/"); };
 }]);
-//reservedoctorCtrl js
-myApp.controller("reservedoctorCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
+//updatedoctorCrtl js
+myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
     //home page
     $scope.homepage = function () {$location.path("/"); };

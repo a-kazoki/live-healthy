@@ -18,60 +18,59 @@
     <title>Live-Healthy</title>
     <script>
         var apiurl = "http://yakensolution.cloudapp.net:80/LiveHealthy/api/",
-        language = "EN",
-        lang = "en";
+        language = "AR",
+        lang = "ar";
         function scrollWin() {
             window.scrollTo(0, 0);
         }
     </script>
 </head>
 
-<body class="" ng-app="myApp">
+<body class="" ng-app="myApp" dir="rtl">
     <div class="page-wrapper">
         <div class="header-wrapper" ng-controller="headerCtrl">
             <div class="header">
                 <div class="header-inner">
                     <div class="header-top">
                         <div class="container">
-                            <a href="index.html">
+                            <a href="index-ar.html">
                                 <img src="assets/img/logo.png" alt="" class="header-top-logo">
                             </a>
-
                             <div class="nav-primary-wrapper collapse navbar-toggleable-sm">
                                 <ul class="nav nav-pills ">
                                     <li class="nav-item has-submenu">
-                                        <a href="" ng-click="gotopage('')" class="nav-link">Home</a>
+                                        <a href="" ng-click="gotopage('')" class="nav-link">الرئيسية</a>
                                     </li>
 
                                     <li class="nav-item has-submenu">
-                                        <a href="" ng-click="gotopage('about')" class="nav-link ">About</a>
+                                        <a href="" ng-click="gotopage('about')" class="nav-link ">عن ليف هيلثي</a>
                                     </li>
 
                                     <li class="nav-item has-submenu">
-                                        <a href="" ng-click="gotopage('t&c')" class="nav-link ">Terms and Conditions</a>
+                                        <a href="" ng-click="gotopage('t&c')" class="nav-link ">الشروط و الاحكام</a>
                                     </li>
 
                                     <li class="nav-item has-submenu">
-                                        <a href="" data-toggle="modal" data-target="#contactusModal" class="nav-link ">Contact us</a>
+                                        <a href="" data-toggle="modal" data-target="#contactusModal" class="nav-link ">تواصل معنا</a>
                                     </li>
                                     <li class="nav-item" ng-if="!islogedin">
-                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#loginmodal"> Login</a></span>
-                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#regmodal"> Register</a></span>
+                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#loginmodal"> الدخول</a></span>
+                                        <span><a href="" class="btn btn-primary" data-toggle="modal" data-target="#regmodal"> التسجيل</a></span>
                                         <!--<a href="" class="bg-Info"> Register as adoctor !</a>-->
                                     </li>
                                     <div ng-if="islogedin" style="display: inline-block; padding-left: 20px">
                                         <li class="nav-item user-avatar-wrapper pull-right" style="display:inline-block">
                                             <img class="nav-link circle user-avatar-image" ng-src={{patientdetails.PatientDetails.Image}} onerror="this.src='assets/img/avatar.png';" style="background-color: #fff">
                                             <ul class="header-more-menu" style="z-index: 999">
-                                                <li><a href="" ng-click="gotopage('profile')">Profile</a>
+                                                <li><a href="" ng-click="gotopage('profile')">صفحتي</a>
                                                 </li>
                                                 <hr style="margin: 5px 0px">
-                                                <li ng-if="subprofiles.length < 2"><a href="" data-toggle="modal" data-target="#addsubmodal" >Add Sub-account</a>
+                                                <li ng-if="subprofiles.length < 2"><a href="" data-toggle="modal" data-target="#addsubmodal" >اضافة حساب</a>
                                                 </li>
                                                 <li ng-repeat="subpro in subprofiles"><a href="" ng-click="subprofileview(subpro.Patient_ID)">{{subpro.Patient_Name}}</a>
                                                 </li>
                                                 <hr style="margin: 5px 0px">
-                                                <li><a href="" ng-click="logout()">Logout</a>
+                                                <li><a href="" ng-click="logout()">الخروج</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -93,22 +92,22 @@
                     <div class="header-bottom">
                         <div class="container">
                             <div class="header-bottom-label hidden-md-down">
-                                I'm looking for
+                                ابحث عن
                             </div>
                             <!-- /.header-bottom-label -->
 
                             <ul class="nav nav-pills">
-                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Pharmacy</a>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">صيدالية</a>
                                 </li>
-                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Radiology</a>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">اشعة</a>
                                 </li>
-                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">laboratories</a>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">معمل</a>
                                 </li>
-                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Emergencies</a>
+                                <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">طواريء</a>
                                 </li>
-                                <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">Home visit</a>
+                                <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">زيارة منزلية</a>
                                 </li>
-                                <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">Doctors</a>
+                                <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">طبيب</a>
                                 </li>
                             </ul>
                             <!-- /.nav -->
@@ -117,7 +116,7 @@
                                 <i class="md-icon">language</i>
 
                                 <ul class="header-more-menu">
-                                    <li><a href="index-ar.html">عربي</a>
+                                    <li><a href="index.html">English</a>
                                     </li>
                                 </ul>
                             </div>
@@ -138,7 +137,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Log In Into Account</h4>
+                            <h4 class="modal-title" id="myModalLabel">الدخول على الحساب</h4>
                         </div>
                         <div class="modal-body">
                             <ul class="nav nav-tabs" role="tablist" style="display: none">
@@ -154,25 +153,25 @@
                                             <div class="col-lg-8 col-lg-offset-2">
                                                 <form>
                                                     <div class="form-group">
-                                                        <label for="">E-mail</label>
+                                                        <label for="">البريد الالكتروني</label>
                                                         <input type="text" class="form-control" ng-model="loginemail">
                                                     </div>
                                                     <!-- /.form-group -->
                                                     <div class="form-group">
-                                                        <label for="">Password</label>
+                                                        <label for="">كلمة السر</label>
                                                         <input type="password" class="form-control" ng-model="loginpass">
                                                     </div>
                                                     <!-- /.form-group -->
                                                     <span ng-if="errorlogin" style="color: #01a796">{{errormsg}}</span>
                                                     <div class="form-group-btn">
-                                                        <button type="submit" class="btn btn-primary pull-right" ng-click="loginup()">Sign In</button>
+                                                        <button type="submit" class="btn btn-primary pull-right" ng-click="loginup()">الدخول</button>
                                                     </div>
                                                     <!-- /.form-group-btn -->
                                                     <div class="form-group-bottom-link">
-                                                        <a href="" data-target="#forgetform" aria-controls="forgetform" role="tab" data-toggle="tab">I forgot my password <i class="fa fa-long-arrow-right"></i></a>
+                                                        <a href="" data-target="#forgetform" aria-controls="forgetform" role="tab" data-toggle="tab">نسيت كلمة السر؟<i class="fa fa-long-arrow-right"></i></a>
                                                     </div>
                                                     <!-- /.form-group-bottom-link -->
-                                                    <p>or</p><button class="btn btn-info" ng-click="FBLogin()">Login Via Facebook</button>
+                                                    <p>او</p><button class="btn btn-info" ng-click="FBLogin()">الدخول باستخدام كلمة السر</button>
                                                 </form>
                                             </div>
                                             <!-- /.col-* -->
@@ -183,17 +182,17 @@
                                 <div role="tabpanel" class="tab-pane" id="forgetform">
                                     <form>
                                         <div class="form-group">
-                                            <label for="">E-mail Address</label>
+                                            <label for="">البريد الالكتروني</label>
                                             <input type="text" class="form-control" required ng-model="forgetemail">
                                         </div>
                                         <p>{{forgeterrormsg}}</p>
                                         <!-- /.form-group -->
                                         <div class="form-group-btn">
-                                            <button type="submit" class="btn btn-primary btn-block" data-target="#resetform" aria-controls="resetform" role="tab" data-toggle="tab" ng-click="forgetpass()">Reset Password</button>
+                                            <button type="submit" class="btn btn-primary btn-block" data-target="#resetform" aria-controls="resetform" role="tab" data-toggle="tab" ng-click="forgetpass()">تغير كلمة السر</button>
                                         </div>
                                         <!-- /.form-group-btn -->
                                         <div class="form-group-bottom-link">
-                                            <a href="" data-target="#loginform" aria-controls="loginform" role="tab" data-toggle="tab"><i class="fa fa-long-arrow-left"></i> Return back to login</a>
+                                            <a href="" data-target="#loginform" aria-controls="loginform" role="tab" data-toggle="tab"><i class="fa fa-long-arrow-left"></i> العودة للدخول</a>
                                         </div>
                                         <!-- /.form-group-bottom-link -->
                                     </form>
@@ -201,27 +200,27 @@
                                 <div role="tabpanel" class="tab-pane" id="resetform">
                                     <form ng-submit="resetpass()">
                                         <div class="form-group">
-                                            <label for="">E-mail Address</label>
+                                            <label for="">البريد الالكتروني</label>
                                             <input type="email" class="form-control" required ng-model="forgetemail">
                                         </div>
                                         <!-- /.form-group -->
                                         <div class="form-group">
-                                            <label for="">Password</label>
+                                            <label for="">كلمة السر</label>
                                             <input type="password" class="form-control" required ng-model="newpass">
                                         </div>
                                         <!-- /.form-group -->
                                         <div class="form-group">
-                                            <label for="">Verification Code sent to your email</label>
+                                            <label for="">الكود الذي تم ارسالة لبريدك لااليكتروني</label>
                                             <input type="text" class="form-control" required ng-model="newvercode">
                                         </div>
                                         <!-- /.form-group -->
                                         <div class="form-group-btn">
-                                            <button type="submit" class="btn btn-primary btn-block">Change Password</button>
+                                            <button type="submit" class="btn btn-primary btn-block">كلمة السر الجديدة</button>
                                         </div>
                                         <p>{{vermessage}}</p>
                                         <!-- /.form-group-btn -->
                                         <div class="form-group-bottom-link">
-                                            <a href="" data-target="#loginform" aria-controls="loginform" role="tab" data-toggle="tab"><i class="fa fa-long-arrow-left"></i> Return back to login</a>
+                                            <a href="" data-target="#loginform" aria-controls="loginform" role="tab" data-toggle="tab"><i class="fa fa-long-arrow-left"></i> العودة للدخول</a>
                                         </div>
                                         <!-- /.form-group-bottom-link -->
                                     </form>    
@@ -229,7 +228,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
@@ -240,27 +239,27 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Contact Us Form</h4>
+                            <h4 class="modal-title" id="myModalLabel">للتواصل معنا</h4>
                         </div>
                         <div class="modal-body">
                             <form ng-submit="contactusform()">
                                 <div class="form-group">
-                                    <label for="">Subject</label>
+                                    <label for="">العنوان</label>
                                     <input type="text" class="form-control" ng-model="contactsubject" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Email</label>
+                                    <label for="">البريد الالكتروني</label>
                                     <input type="email" class="form-control" ng-model="contactemail" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Messsage</label>
+                                    <label for="">رسالتك</label>
                                     <textarea type="text" class="form-control" ng-model="contactmsg" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">ارسال</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
@@ -271,69 +270,69 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Registration</h4>
+                            <h4 class="modal-title" id="myModalLabel">التسجيل</h4>
                         </div>
                         <div class="modal-body">
                             <form>
                                 <div class="row">
                                     <div class="col-lg-8 col-lg-offset-2">
-                                        <button class="btn btn-info" ng-click="FBreg()">Sign Up Via Facebook</button>
-                                        <p ng-if="choosefacebook">Please complete your data for signup</p>
-                                        <p ng-if="!choosefacebook">Or normal sign up</p>
+                                        <button class="btn btn-info" ng-click="FBreg()">التسجيل بالفيس بوك</button>
+                                        <p ng-if="choosefacebook">من فضلك اكمل بياناتك لتسجيل الدخول</p>
+                                        <p ng-if="!choosefacebook">او سجل بدون الفيس بوك</p>
                                         <div class="form-group">
-                                            <label for="">Username&ast;</label>
+                                            <label for="">اسم المستخدم&ast;</label>
                                             <input type="text" class="form-control" ng-model="regname" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">E-mail&ast;</label>
+                                            <label for="">البريد الالكتروني&ast;</label>
                                             <input type="email" class="form-control" ng-model="regemail" required>
                                         </div>
                                         <div class="form-group" ng-if="!choosefacebook">
-                                            <label for="">Password&ast;</label>
+                                            <label for="">كلمة السر&ast;</label>
                                             <input type="password" class="form-control" ng-model="regpass" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Address</label>
+                                            <label for="">العنوان</label>
                                             <input type="text" class="form-control" ng-model="regadd">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Mobile Number</label>
+                                            <label for="">رقم المحمول</label>
                                             <input type="text" class="form-control" ng-model="regmob">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Date of birth</label>
+                                            <label for="">تاريخ الميلاد</label>
                                             <select ng-model="dob1" style="min-width:70px">
-                                                <option value="" disabled selected>Day</option>
+                                                <option value="" disabled selected>اليوم</option>
                                                 <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
                                             </select>
                                             &sol;
                                             <select ng-model="dob2" style="min-width:70px">
-                                                <option value="" disabled selected>Month</option>
+                                                <option value="" disabled selected>الشهر</option>
                                                 <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
                                             </select>
                                             &sol;
                                             <select ng-model="dob3" style="min-width:70px">
-                                                <option value="" disabled selected>Year</option>
+                                                <option value="" disabled selected>السنة</option>
                                                 <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Gender</label>
+                                            <label for="">الجنس</label>
                                             <select class="form-control" ng-model="reggender">
-                                                <option value="" disabled selected>Male or Female</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
+                                                <option value="" disabled selected>الجنس</option>
+                                                <option value="Male">ذكر</option>
+                                                <option value="Female">انثى</option>
                                             </select>
                                         </div>
                                         <input type="file" id="regimage" name="myFile" />
                                         <div class="center">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="tcagree"> By signing up, you agree with the <a href="" ng-click="gotopage('t&c')">terms and conditions</a>
+                                                <input type="checkbox" ng-model="tcagree"> مع التسجيل يجب ان توافق على <a href="" ng-click="gotopage('t&c')">الشروط و الاحكام</a>
                                             </div>
                                             <div class="form-group-btn">
-                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && !choosefacebook" ng-click=" register()">Create Account</button>
-                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && choosefacebook" ng-click=" fbregister()">Create Account using facebook</button>
-                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">Create Account</button>
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && !choosefacebook" ng-click=" register()">انشاء حساب</button>
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree && choosefacebook" ng-click=" fbregister()">انشاء حساب باستخدام الفيس بوك</button>
+                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">انشاء حساب</button>
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +340,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
@@ -352,65 +351,65 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Add sub profile</h4>
+                            <h4 class="modal-title" id="myModalLabel">اضافة حساب ثانوي</h4>
                         </div>
                         <div class="modal-body">
                             <form ng-submit="subregister()">
                                 <div class="row">
                                     <div class="col-lg-8 col-lg-offset-2">
                                         <div class="form-group">
-                                            <label for="">Username&ast;</label>
+                                            <label for="">اسم المستخدم&ast;</label>
                                             <input type="text" class="form-control" ng-model="subregname" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">E-mail&ast;</label>
+                                            <label for="">البريد الالكتروني&ast;</label>
                                             <input type="email" class="form-control" ng-model="subregemail" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Password&ast;</label>
+                                            <label for="">كلمة السر&ast;</label>
                                             <input type="password" class="form-control" ng-model="subregpass" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Address</label>
+                                            <label for="">العنوان</label>
                                             <input type="text" class="form-control" ng-model="subregadd">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Mobile Number</label>
+                                            <label for="">رقم المحمول</label>
                                             <input type="text" class="form-control" ng-model="subregmob">
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Date of birth</label>
+                                            <label for="">تاريخ الميلاد</label>
                                             <select ng-model="subdob1" style="min-width:70px">
-                                                <option value="" disabled selected>Day</option>
+                                                <option value="" disabled selected>اليوم</option>
                                                 <option value="{{d}}" ng-repeat="d in dyasinmonth">{{d}}</option>
                                             </select>
                                             &sol;
                                             <select ng-model="subdob2" style="min-width:70px">
-                                                <option value="" disabled selected>Month</option>
+                                                <option value="" disabled selected>الشهر</option>
                                                 <option value="{{m}}" ng-repeat="m in monthsinyear">{{m}}</option>
                                             </select>
                                             &sol;
                                             <select ng-model="subdob3" style="min-width:70px">
-                                                <option value="" disabled selected>Year</option>
+                                                <option value="" disabled selected>السنة</option>
                                                 <option value="{{y}}" ng-repeat="y in yearsrange">{{y}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="">Gender</label>
+                                            <label for="">الجنس</label>
                                             <select class="form-control" ng-model="subreggender">
-                                                <option value="" disabled selected>Male or Female</option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
+                                                <option value="" disabled selected>الجنس</option>
+                                                <option value="Male">ذكر</option>
+                                                <option value="Female">انثى</option>
                                             </select>
                                         </div>
                                         <input type="file" id="subregimage" name="myFile" />
                                         <div class="center">
                                             <div class="checkbox">
-                                                <input type="checkbox" ng-model="tcagree"> By signing up, you agree with the <a href="" ng-click="gotopage('t&c')">terms and conditions</a>
+                                                <input type="checkbox" ng-model="tcagree"> مع التسجيل يجب ان توافق على <a href="" ng-click="gotopage('t&c')">الشروط و الاحكام</a>
                                             </div>
                                             <div class="form-group-btn">
-                                                <button type="submit" class="btn btn-primary" ng-if="tcagree">Create Account</button>
-                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">Create Account</button>
+                                                <button type="submit" class="btn btn-primary" ng-if="tcagree">انشاء حساب</button>
+                                                <button type="submit" class="btn btn-primary" disabled ng-if="!tcagree">انشاء حساب</button>
                                             </div>
                                         </div>
                                     </div>
@@ -418,7 +417,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
@@ -454,7 +453,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-3">
                                 <div class="widget right-border">
-                                    <h2 class="widgettitle">Why Live Healthy?</h2>
+                                    <h2 class="widgettitle">لماذا تنضم لليف هيلثي</h2>
 
                                     <p>
                                         Mauris dictum, sem non pretium ultricies, dolor mi aliquet dolor, non facilisis arcu ligula vitae elit. Pellentesque ac varius sem. Sed pellentesque nisl vitae pellentesque consectetur.
@@ -466,7 +465,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
                                 <div class="widget right-border">
-                                    <h2 class="widgettitle">Social</h2>
+                                    <h2 class="widgettitle">مواقع التواصل الاجتماعي</h2>
 
                                     <ul class="nav nav-stacked">
                                         <li class="nav-item"><a href="" target="_blank" class="nav-link">Facebook</a>
@@ -484,16 +483,16 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
                                 <div class="widget right-border">
-                                    <h2 class="widgettitle">You can search for</h2>
+                                    <h2 class="widgettitle">يمكنك البحث عن</h2>
 
                                     <ul class="nav nav-stacked">
-                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Pharmacy</a>
+                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">الصيدليات</a>
                                         </li>
-                                        <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">Doctors</a>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('doctors')" class="nav-link">الاطباء</a>
                                         </li>
-                                        <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">Home visit</a>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('home_visit')" class="nav-link">الزيارة المنزلية</a>
                                         </li>
-                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="Not Yet Available" class="nav-link">Laboratory</a>
+                                        <li class="nav-item"><a href="" style="cursor: default" data-toggle="tooltip" data-placement="bottom" title="لم يتوفر بعد" class="nav-link">المعامل</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -503,14 +502,14 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-2 col-md-offset-1">
                                 <div class="widget">
-                                    <h2 class="widgettitle">Pages</h2>
+                                    <h2 class="widgettitle">الصفحات</h2>
 
                                     <ul class="nav nav-stacked">
-                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#joinusModal">Doctor? JOIN US</a>
+                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#joinusModal">طبيب؟ انضم الينا</a>
                                         </li>
-                                        <li class="nav-item"><a href="" ng-click="gotopage('t&c')" class="nav-link">Terms and Conditions</a>
+                                        <li class="nav-item"><a href="" ng-click="gotopage('t&c')" class="nav-link">الشروط و الاحكام</a>
                                         </li>
-                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#contactusModal">Contact us</a>
+                                        <li class="nav-item"><a href="" class="nav-link" data-toggle="modal" data-target="#contactusModal">توصل معنا</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -532,7 +531,7 @@
                         </a>
                         <!-- /.footer-top-action -->
                         <div class="footer-bottom-left">
-                            - Created by <a href="http://www.yackeensolutions.com/" target="_blank">Y solutions</a>
+                            - تم التصميم من قبل <a href="http://www.yackeensolutions.com/" target="_blank">Y solutions</a>
                         </div>
                         <!-- /.footer-bottom-left -->
 
@@ -551,47 +550,47 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Join Us Form</h4>
+                            <h4 class="modal-title" id="myModalLabel">انضم الينا</h4>
                         </div>
                         <div class="modal-body">
                             <form ng-submit="joinusform()">
                                 <div class="form-group">
-                                    <label for="">Location</label>
+                                    <label for="">المكان</label>
                                     <input type="text" class="form-control" ng-model="joinLocation" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Address</label>
+                                    <label for="">العنوان</label>
                                     <input type="text" class="form-control" ng-model="joinAddress" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Doctor Name</label>
+                                    <label for="">اسم الطبيب</label>
                                     <input type="text" class="form-control" ng-model="joinDoctorName" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Speciality</label>
+                                    <label for="">التخصص</label>
                                     <input type="text" class="form-control" ng-model="joinSpeciality" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Mobile Number</label>
+                                    <label for="">رقم المحمول</label>
                                     <input type="text" class="form-control" ng-model="joinMobileNumber" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Email</label>
+                                    <label for="">البريد الاليكتروني</label>
                                     <input type="email" class="form-control" ng-model="joinemail" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Type</label>
+                                    <label for="">النوع</label>
                                     <input type="text" class="form-control" ng-model="joinType" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Messsage</label>
+                                    <label for="">ملاحظات</label>
                                     <textarea type="text" class="form-control" ng-model="joinmsg" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">ارسال</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
@@ -602,27 +601,27 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Contact Us Form</h4>
+                            <h4 class="modal-title" id="myModalLabel">تواصل معنا</h4>
                         </div>
                         <div class="modal-body">
                             <form ng-submit="contactusform()">
                                 <div class="form-group">
-                                    <label for="">Subject</label>
+                                    <label for="">العنوان</label>
                                     <input type="text" class="form-control" ng-model="contactsubject" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Email</label>
+                                    <label for="">البريد الاليكتروني</label>
                                     <input type="email" class="form-control" ng-model="contactemail" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Messsage</label>
+                                    <label for="">رسالتك</label>
                                     <textarea type="text" class="form-control" ng-model="contactmsg" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">ارسال</button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">الغاء</button>
                         </div>
                     </div>
                 </div>
