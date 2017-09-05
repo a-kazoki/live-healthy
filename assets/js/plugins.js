@@ -1566,6 +1566,61 @@ myApp.controller("404Ctrl", ["$scope", "authFact", "$location", "$cookies", "$ht
 //updatedoctorCrtl js
 myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
-    //home page
-    $scope.homepage = function () {$location.path("/"); };
+    $scope.doctoken = window.location.href.slice((window.location.href.indexOf("DoctorUpdate/") + 13));
+    console.log($scope.doctoken);
+    //get doc id
+    $http({
+        method: "GET",
+        url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/GetDoctorLoginData?DoctorToken=" + $scope.doctoken
+    })
+        .then(function (response) {
+            if (response.data.isSuccess) {
+                console.log(response.data.Response);
+                $scope.docid = response.data.Response.UserDetails.DoctorID;
+                $scope.docuserid = response.data.Response.UserDetails.User_ID;
+                console.log($scope.docid);
+                console.log($scope.docuserid);
+            } else {
+                $scope.errormsg = response.data.errorMessage;
+                console.log($scope.errormsg);
+            }
+        }, function (reason) {
+            console.log(reason.data);
+        });
+    //get specialist
+    $http({
+        method: "GET",
+        url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Specialities/GetSpecialities?PageNumber=1&NumberRecords=100"
+    })
+        .then(function (response) {
+            if (response.data.isSuccess) {
+                console.log(response.data.Response);
+                $scope.specialists = response.data.Response;
+            } else {
+                $scope.errormsg = response.data.errorMessage;
+                console.log($scope.errormsg);
+            }
+        }, function (reason) {
+            console.log(reason.data);
+        });
+    //edit doctor details
+    $scope.docdetails = function () {
+        console.log("true");
+        $('#account').tab('show');
+//        $http({
+//            method: "POST",
+//            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoUpdateDoctorDetails",
+//            data: JSON.stringify({"Doctor_ID": $scope.docid, "Mobile_Number": $scope.docnumber, "Name_AR": $scope.arname, "Name": $scope.enname, "Speciality_ID": $scope.specialityid, "Email": $scope.docemail, "Descrpition": $scope.endescription, "Descrpition_AR": $scope.ardescription, "lang": lang})
+//        })
+//            .then(function (response) {
+//                if (response.data.isSuccess) {
+//                    console.log(response.data);
+//                } else {
+//                    $scope.errormsg = response.data.errorMessage;
+//                    console.log($scope.errormsg);
+//                }
+//            }, function (reason) {
+//                console.log(reason.data);
+//            });
+    };
 }]);

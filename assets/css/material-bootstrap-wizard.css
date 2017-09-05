@@ -1110,6 +1110,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   opacity: 1;
 }
 
+/*
 .btn {
   border: none;
   border-radius: 3px;
@@ -1129,6 +1130,8 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
 .btn, .btn.btn-default {
   box-shadow: 0 2px 2px 0 rgba(153, 153, 153, 0.14), 0 3px 1px -2px rgba(153, 153, 153, 0.2), 0 1px 5px 0 rgba(153, 153, 153, 0.12);
 }
+*/
+/*
 .btn, .btn:hover, .btn:focus, .btn:active, .btn.active, .btn:active:focus, .btn:active:hover, .btn.active:focus, .btn.active:hover, .open > .btn.dropdown-toggle, .open > .btn.dropdown-toggle:focus, .open > .btn.dropdown-toggle:hover, .btn.btn-default, .btn.btn-default:hover, .btn.btn-default:focus, .btn.btn-default:active, .btn.btn-default.active, .btn.btn-default:active:focus, .btn.btn-default:active:hover, .btn.btn-default.active:focus, .btn.btn-default.active:hover, .open > .btn.btn-default.dropdown-toggle, .open > .btn.btn-default.dropdown-toggle:focus, .open > .btn.btn-default.dropdown-toggle:hover {
   background-color: #999999;
   color: #FFFFFF;
@@ -1170,6 +1173,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   background-color: transparent;
   color: #9c27b0;
 }
+*/
 .btn.btn-info {
   box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
 }
@@ -1339,12 +1343,15 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
 }
 
 /*            Navigation menu                */
+/*
 .nav-pills {
   background-color: rgba(200, 200, 200, 0.2);
 }
+*/
 .nav-pills > li + li {
   margin-left: 0;
 }
+/*
 .nav-pills > li > a {
   border: 0 !important;
   border-radius: 0;
@@ -1356,6 +1363,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   text-align: center;
   color: #555555 !important;
 }
+*/
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus,

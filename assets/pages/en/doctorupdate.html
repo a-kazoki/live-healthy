@@ -1,5 +1,4 @@
 
-	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
 	<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
 	<link href="assets/css/demo.css" rel="stylesheet" />
@@ -9,13 +8,13 @@
 	
 
 	    <!--   Big container   -->
-	    <div class="container">
+	    <div class="container" ng-controller="updatedoctorCrtl">
 	        <div class="row">
 		        <div class="col-sm-8 col-sm-offset-2">
 		            <!--      Wizard container        -->
 		            <div class="wizard-container">
 		                <div class="card wizard-card" data-color="green" id="wizardProfile">
-		                    <form action="" method="">
+		                    
 		           
 
 		                    	<div class="wizard-header">
@@ -25,36 +24,37 @@
 									<h5>This information will let us know more about you.</h5>
 		                    	</div>
 								<div class="wizard-navigation">
-									<ul>
+									<ul role="tablist">
 			                            <li><a href="" data-target="#about" data-toggle="tab">About</a></li>
-			                            <li><a href="" data-target="#account" data-toggle="tab">Clinic</a></li>
+			                            <li><a href="#account" data-toggle="tab">Clinic</a></li>
 			                            <li><a href="" data-target="#address" data-toggle="tab">scedule</a></li>
 			                        </ul>
 								</div>
 
 		                        <div class="tab-content">
 		                            <div class="tab-pane" id="about">
+                                        <form ng-submit="docdetails()">
 		                              <div class="row">
 		                                	<div class="col-sm-6">
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons">face</i>
 													</span>
-													<div class="form-group label-floating">
-			                                          <label class="control-label">First Name <small>(required)</small></label>
-			                                          <input name="firstname" type="text" class="form-control">
-			                                        </div>
+													<div class="form-group">
+                                                        <label for="">Name</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
 												</div>
 		                                	</div>
 		                                	<div class="col-sm-6">
 		                                		<div class="input-group">
 													<span class="input-group-addon">
-														<i class="material-icons">record_voice_over</i>
+														<i class="material-icons">face</i>
 													</span>
-													<div class="form-group label-floating">
-													  <label class="control-label">Last Name <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
-													</div>
+													<div class="form-group">
+                                                        <label for="">Name in Arabic</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
 												</div>
 		                                	</div>
 		                                	<div class="col-sm-6 ">
@@ -62,10 +62,10 @@
 													<span class="input-group-addon">
 														<i class="material-icons">email</i>
 													</span>
-													<div class="form-group label-floating">
-			                                            <label class="control-label">Email <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
-			                                        </div>
+													<div class="form-group">
+                                                        <label for="">E-mail</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
 												</div>
 		                                	</div>
 		                                	<div class="col-sm-6 ">
@@ -73,10 +73,10 @@
 													<span class="input-group-addon">
 														<i class="material-icons"><i class="material-icons">phonelink_ring</i></i>
 													</span>
-													<div class="form-group label-floating">
-			                                            <label class="control-label">Mobile num <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
-			                                        </div>
+													<div class="form-group">
+                                                        <label for="">Mobile Number</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
 												</div>
 		                                	</div>
 		                                	<div class="col-sm-6 ">
@@ -85,63 +85,41 @@
 														<i class="material-icons">work</i>
 													</span>
 													<div class="form-group label-floating">
-			                                            <label class="control-label">Speciality <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
+			                                            <select ng-model="specialityid" class="form-control" required>
+                                                            <option value="" selected disabled>Speciality <small>(required)</small></option>
+                                                            <option value="{{special.Speciality_ID}}" ng-repeat="special in specialists">{{special.Name}}</option>
+                                                        </select>
 			                                        </div>
 												</div>
-		                                	</div>
-		                                	<div class="col-sm-6 ">
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">format_size</i>
-													</span>
-													<div class="form-group label-floating">
-			                                            <label class="control-label">Title <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
-			                                        </div>
-												</div>
-		                                	</div>
-		                                	 <div class="col-sm-6">
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">assignment_ind</i>
-													</span>
-													<div class="form-group label-floating">
-			                                          <label class="control-label">Consultion_ID <small>(required)</small></label>
-			                                          <input name="firstname" type="text" class="form-control">
-			                                        </div>
-												</div>
-		                                	</div>
-		                                	<div class="col-sm-6">
-		                                		<div  class="input-group">
-		                                		    <span class="input-group-addon">
-														<label class="control-label">Gender </label>
-													</span>
-		                                			<div class="form-group label-floating">
-
-		                                				<div class="md-radio md-radio-inline">
-														    <input id="3" type="radio" name="g2" checked>
-														    <label for="3">Male</label>
-												        </div>
-														<div class="md-radio md-radio-inline">
-														    <input id="4" type="radio" name="g2">
-														    <label for="4">Female</label>
-														</div>
-		                                			</div>
-		                                		</div>
 		                                	</div>
 		                                	<div class="col-sm-12 ">
 												<div class="input-group">
 													<span class="input-group-addon">
 														<i class="material-icons"></i>
 													</span>
-													<div class="form-group label-floating">
-		                                            <label class="control-label">Place description</label>
-		                                            <textarea class="form-control" placeholder="" rows="9"></textarea>
-		                                        </div>
+													<div class="form-group">
+                                                        <label for="">Description</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
+												</div>
+		                                	</div>
+		                                	<div class="col-sm-12 ">
+												<div class="input-group">
+													<span class="input-group-addon">
+														<i class="material-icons"></i>
+													</span>
+													<div class="form-group">
+                                                        <label for="">Description in Arabic</label>
+                                                        <input type="text" class="form-control" ng-model="patientdetails.Name" required>
+                                                    </div>
 												</div>
 		                                	</div>
 		                            	</div>
+                                        <div class="pull-right">
+                                            <input type='submit' class='btn btn-success btn-wd'>
+                                        </div>
+                                        <hr>
+                                        </form>
 		                            </div>
 		                            <div class="tab-pane" id="account">
 		                                <!-- <h4 class="info-text"> Clinic </h4> -->
@@ -220,6 +198,11 @@
 												
 		                                	</div>
 		                                </div>
+                                        <div class="pull-right">
+		                                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd'/>
+		                                  <input type='button' class='btn btn-next btn-fill btn-success btn-wd'/>
+                                        </div>
+                                        <hr>
 		                            </div>
 		                            <div class="tab-pane" id="address">
 		                                <div class="row">
@@ -259,20 +242,13 @@
 		                                         </div>
 		                                    </div>
 		                                </div>
+                                        <div class="pull-right">
+		                                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd'/>
+		                                  <input type='button' class='btn btn-finish btn-fill btn-success btn-wd'/>
+                                        </div>
+                                        <hr>
 		                            </div>
 		                        </div>
-		                        <div class="wizard-footer">
-		                            <div class="pull-right">
-		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
-		                            </div>
-
-		                            <div class="pull-left">
-		                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
-		                            </div>
-		                            <div class="clearfix"></div>
-		                        </div>
-		                    </form>
 		                </div>
 		            </div> <!-- wizard container -->
 		        </div>
