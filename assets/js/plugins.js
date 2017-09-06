@@ -15,6 +15,10 @@ myApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $
             templateUrl : "assets/pages/" + lang + "/terms-conditions.html",
             controller : "t&cCtrl"
         })
+        .when("/about", {
+            templateUrl : "assets/pages/" + lang + "/about.html",
+            controller : "aboutCtrl"
+        })
         .when("/doctors", {
             templateUrl : "assets/pages/" + lang + "/doctors.html",
             controller : "doctorsCtrl",
@@ -452,6 +456,11 @@ myApp.controller("homeCtrl", ["$scope", "authFact", "$location", "$cookies", "$h
 }]);
 //t&cCtrl js
 myApp.controller("t&cCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
+    "use strict";
+    
+}]);
+//aboutCtrl js
+myApp.controller("aboutCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
     
 }]);
@@ -1217,7 +1226,14 @@ myApp.controller("profileCtrl", ["$scope", "authFact", "$location", "$cookies", 
                 "Name": z,
                 "Dosage": w});
         } else {
-            $scope.newmedication.splice($scope.notelist.indexOf(y), 1);
+            var i = 0;
+            for (i; i < $scope.newmedication.length; i = i + 1) {
+                console.log($scope.newmedication[i].Medicine_ID);
+                if ($scope.newmedication[i].Medicine_ID === y) {
+                    console.log(i);
+                    $scope.newmedication.splice(i, 1);
+                }
+            }
         }
         console.log($scope.newmedication);
         $http({
@@ -1244,7 +1260,6 @@ myApp.controller("profileCtrl", ["$scope", "authFact", "$location", "$cookies", 
     //goto page
     $scope.gotopage = function (x) {$('#regmodal').modal("hide"); $location.path("/" + x); };
 }]);
-
 //subprofileCtrl js
 myApp.controller("subprofileCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
@@ -1520,7 +1535,14 @@ myApp.controller("subprofileCtrl", ["$scope", "authFact", "$location", "$cookies
                 "Name": z,
                 "Dosage": w});
         } else {
-            $scope.newmedication.splice($scope.notelist.indexOf(y), 1);
+            var i = 0;
+            for (i; i < $scope.newmedication.length; i = i + 1) {
+                console.log($scope.newmedication[i].Medicine_ID);
+                if ($scope.newmedication[i].Medicine_ID === y) {
+                    console.log(i);
+                    $scope.newmedication.splice(i, 1);
+                }
+            }
         }
         console.log($scope.newmedication);
         $http({
@@ -1568,6 +1590,17 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
     "use strict";
     $scope.doctoken = window.location.href.slice((window.location.href.indexOf("DoctorUpdate/") + 13));
     console.log($scope.doctoken);
+    //time ready
+    var h = 0,
+        min = 0;
+    $scope.hourinday = [];
+    $scope.mininhour = [];
+    for (h; h <= 23; h = h + 1) {
+        $scope.hourinday.push(h);
+    }
+    for (min; min <= 59; min = min + 1) {
+        $scope.mininhour.push(min);
+    }
     //get doc id
     $http({
         method: "GET",
@@ -1578,13 +1611,15 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
                 console.log(response.data.Response);
                 $scope.docid = response.data.Response.UserDetails.DoctorID;
                 $scope.docuserid = response.data.Response.UserDetails.User_ID;
-                console.log($scope.docid);
-                console.log($scope.docuserid);
+                //console.log($scope.docid);
+                //console.log($scope.docuserid);
             } else {
+                $location.path("/notfound");
                 $scope.errormsg = response.data.errorMessage;
                 console.log($scope.errormsg);
             }
         }, function (reason) {
+            $location.path("/notfound");
             console.log(reason.data);
         });
     //get specialist
@@ -1603,24 +1638,186 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
         }, function (reason) {
             console.log(reason.data);
         });
+    //get days
+    $http({
+        method: "GET",
+        url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Days/GetDays?PageNumber=1&NumberRecords=10"
+    })
+        .then(function (response) {
+            if (response.data.isSuccess) {
+                console.log(response.data.Response);
+                $scope.weekdays = response.data.Response;
+            } else {
+                $scope.errormsg = response.data.errorMessage;
+                console.log($scope.errormsg);
+            }
+        }, function (reason) {
+            console.log(reason.data);
+        });
+    //get cities
+    $http({
+        method: "GET",
+        url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Cities/GetCities?PageNumber=1&NumberRecords=100"
+    })
+        .then(function (response) {
+            if (response.data.isSuccess) {
+                console.log(response.data.Response);
+                $scope.cities = response.data.Response;
+            } else {
+                $scope.errormsg = response.data.errorMessage;
+                console.log($scope.errormsg);
+            }
+        }, function (reason) {
+            console.log(reason.data);
+        });
+    //get area
+    $scope.getarea = function (a) {
+        $http({
+            method: "GET",
+            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Areas/GetAreas?City_ID=" + a + "&PageNumber=1&NumberRecords=100"
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.areas = response.data.Response;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
     //edit doctor details
-    $scope.docdetails = function () {
-        console.log("true");
-        $('#account').tab('show');
-//        $http({
-//            method: "POST",
-//            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoUpdateDoctorDetails",
-//            data: JSON.stringify({"Doctor_ID": $scope.docid, "Mobile_Number": $scope.docnumber, "Name_AR": $scope.arname, "Name": $scope.enname, "Speciality_ID": $scope.specialityid, "Email": $scope.docemail, "Descrpition": $scope.endescription, "Descrpition_AR": $scope.ardescription, "lang": lang})
-//        })
-//            .then(function (response) {
-//                if (response.data.isSuccess) {
-//                    console.log(response.data);
-//                } else {
-//                    $scope.errormsg = response.data.errorMessage;
-//                    console.log($scope.errormsg);
-//                }
-//            }, function (reason) {
-//                console.log(reason.data);
-//            });
+    $scope.docdetails = function (a, b, c, d, e, f, g) {//docnumber arname enname specialityid docemail endescription ardescription
+        $http({
+            method: "POST",
+            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoUpdateDoctorDetails",
+            data: JSON.stringify({"Doctor_ID": $scope.docid, "Mobile_Number": a, "Name_AR": b, "Name": c, "Speciality_ID": d, "Email": e, "Descrpition": f, "Descrpition_AR": g, "lang": lang})
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    $scope.docdatachanged = true;
+                    console.log(response.data);
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //create clinic list
+    $scope.listofclinics = [];
+    $scope.medid = 1;
+    //add or remove clinic
+    $scope.addremoveclinic = function (x, y, a, b, c, d, e, f, g, h, i, j, k) {//ClinicName, ClinicNameAR, ClinicPrice, ClinicAddress, ClinicAddressAR, ClinicCityID, ClinicAreaID, MobileNumber, ClinicLandLine, ClinicRequestsPerDay, ClinicDiscount
+        //console.log(x);//add or remove(true or false)
+        //console.log($scope.medid);
+        if (x) {
+            $scope.listofclinics.push({"Clinic_ID": $scope.medid,
+                "Clinic_Name": a,
+                "Clinic_Name_AR": b,
+                "Price": c,
+                "Address": d,
+                "Address_AR": e,
+                "City_ID": f,
+                "Area_ID": g,
+                "Mobile_Number": " ",
+                "Land_Line": i,
+                "Requests_Per_Day": j,
+                "Discount": k});
+            $scope.medid = $scope.medid + 1;
+        } else {
+            var i = 0;
+            for (i; i < $scope.listofclinics.length; i = i + 1) {
+                console.log($scope.listofclinics[i].Clinic_ID);
+                if ($scope.listofclinics[i].Clinic_ID === y) {
+                    //console.log(i);
+                    $scope.listofclinics.splice(i, 1);
+                }
+            }
+        }
+        console.log($scope.listofclinics);
+        $scope.ClinicName = "";
+        $scope.ClinicNameAR = "";
+        $scope.ClinicPrice = "";
+        $scope.ClinicAddress = "";
+        $scope.ClinicAddressAR = "";
+        $scope.ClinicCityID = "";
+        $scope.ClinicAreaID = "";
+        $scope.MobileNumber = "";
+        $scope.ClinicLandLine = "";
+        $scope.ClinicRequestsPerDay = "";
+        $scope.ClinicDiscount = "";
+    };
+    //update clinics
+    $scope.sendclinics = function () {
+        console.log($scope.listofclinics);
+        console.log(JSON.stringify({"AllClinics": JSON.parse(angular.toJson($scope.listofclinics)), "Doctor_ID": $scope.docid, "lang": lang}));
+        $http({
+            method: "POST",
+            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoUpdateDoctorClinics",
+            data: JSON.stringify({"AllClinics": JSON.parse(angular.toJson($scope.listofclinics)), "Doctor_ID": $scope.docid, "lang": lang})
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.clinicsaved = true;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    $scope.daysofclinic = [];
+    //add or remove clinic
+    $scope.addschedul = function (a, b, c) {
+        $scope.daysofclinic.push({"DayID": a,
+                "From_Hour": JSON.stringify(b).substr(15, 8),
+                "To_Hour": JSON.stringify(c).substr(15, 8)});
+        //console.log($scope.daysofclinic);
+        $scope.wday = "";
+        $scope.fromtime = "";
+        $scope.totime = "";
+    };
+    //update clinic times
+    $scope.saveclinicschedule = function (a) {
+        $http({
+            method: "POST",
+            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoUpdateDoctorTimes",
+            data: JSON.stringify({"AllSlots": $scope.daysofclinic, "DoctorID": $scope.docid, "Clinic_ID": a})
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.daysofclinic.splice(0, $scope.daysofclinic.length);
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
+    };
+    //Finish
+    $scope.finish = function () {
+        $http({
+            method: "GET",
+            url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/SendConfirmationMail?DoctorID=" + $scope.docid
+        })
+            .then(function (response) {
+                if (response.data.isSuccess) {
+                    console.log(response.data.Response);
+                    $scope.mailsent = true;
+                } else {
+                    $scope.errormsg = response.data.errorMessage;
+                    console.log($scope.errormsg);
+                }
+            }, function (reason) {
+                console.log(reason.data);
+            });
     };
 }]);
