@@ -1590,6 +1590,7 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
     "use strict";
     $scope.doctoken = window.location.href.slice((window.location.href.indexOf("DoctorUpdate/") + 13));
     console.log($scope.doctoken);
+    $scope.docarabic = false;
     //time ready
     var h = 0,
         min = 0;
@@ -1709,7 +1710,7 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
     };
     //create clinic list
     $scope.listofclinics = [];
-    $scope.medid = 1;
+    $scope.medid = 3;
     //add or remove clinic
     $scope.addremoveclinic = function (x, y, a, b, c, d, e, f, g, h, i, j, k) {//ClinicName, ClinicNameAR, ClinicPrice, ClinicAddress, ClinicAddressAR, ClinicCityID, ClinicAreaID, MobileNumber, ClinicLandLine, ClinicRequestsPerDay, ClinicDiscount
         //console.log(x);//add or remove(true or false)
