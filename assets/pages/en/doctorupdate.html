@@ -209,12 +209,12 @@
                                 <button class='btn btn-success btn-wd' ng-click="sendclinics()">Save Clinics</button>
                             </div>
                             <br><br><br>
-                            <div ng-repeat="cli in listofclinics">
+                            <div ng-repeat="cli in savedclinics">
                                 <div class="well">
                                     <p ng-if="clinicsaved" class="lead">Now Please Add your Schedule to each clinic</p>
                                     <a href="">{{cli.Clinic_Name}}</a>
                                     <div class="pull-right">
-                                        <button class="btn btn-danger" ng-click="addremoveclinic(false, cli.Clinic_ID)">Remove</button>
+<!--                                        <button class="btn btn-danger" ng-click="addremoveclinic(false, cli.Clinic_ID)">Remove</button>-->
                                         <button ng-if="clinicsaved" class="btn btn-primary" data-target="#collapseOne{{cli.Clinic_ID}}" data-toggle="collapse" data-parent="#accordion">Add Schedule</button>
                                     </div> 
                                     <div id="collapseOne{{cli.Clinic_ID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
@@ -455,12 +455,12 @@
                                 <button class='btn btn-success btn-wd' ng-click="sendclinics()">تسجيل العيادات</button>
                             </div>
                             <br><br><br>
-                            <div ng-repeat="cli in listofclinics">
+                            <div ng-repeat="cli in savedclinics">
                                 <div class="well">
                                     <p ng-if="clinicsaved" class="lead">الان من فضلك اضف مواعيد كل عيادة</p>
                                     <a href="">{{cli.Clinic_Name_AR}}</a>
                                     <div class="pull-right">
-                                        <button class="btn btn-danger" ng-click="addremoveclinic(false, cli.Clinic_ID)">ازالة</button>
+<!--                                        <button class="btn btn-danger" ng-click="addremoveclinic(false, cli.Clinic_ID)">ازالة</button>-->
                                         <button ng-if="clinicsaved" class="btn btn-primary" data-target="#collapseOne{{cli.Clinic_ID}}" data-toggle="collapse" data-parent="#accordion">اضافة المواعيد</button>
                                     </div> 
                                     <div id="collapseOne{{cli.Clinic_ID}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">

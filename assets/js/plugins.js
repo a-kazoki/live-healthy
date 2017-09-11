@@ -155,11 +155,13 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
             });
     };
     //register
-    $scope.register = function () {
+    $scope.upregister = function () {
+        console.log($scope.regpassword);
+        console.log($scope.regemail);
         var form = new FormData();
         form.append("Image", document.getElementById("regimage").files[0]);
         form.append("Email", $scope.regemail);
-        form.append("Password", $scope.regpass);
+        form.append("Password", $scope.regpassword);
         form.append("Age", "0");
         form.append("DOB", $scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
         form.append("Address", $scope.regadd);
@@ -185,9 +187,32 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
             console.log(JSON.parse(response));
             console.log(JSON.parse(response).isSuccess);
             if (JSON.parse(response).isSuccess) {
-                $scope.loginemail = $scope.regemail;
-                $scope.loginpass = $scope.regpass;
-                $scope.loginup();
+                $http({
+                    method: "POST",
+                    data: JSON.stringify({"Email": $scope.regemail, "Password": $scope.regpassword, "lang": lang}),
+                    url: apiurl + "User/Login"
+                })
+                    .then(function (response) {
+                        if (response.data.isSuccess) {
+                            console.log(response.data.Response);
+                            console.log(response.data.Response.UserDetails.User_ID);
+                            console.log(response.headers().token);
+                            $scope.username = response.data.Response.PatientDetails.Patient_Name;
+                            $scope.errorlogin = false;
+                            $scope.islogedin = true;
+                            $cookies.putObject('Patient_ID', response.data.Response.PatientDetails.Patient_ID);
+                            $cookies.putObject('User_ID', response.data.Response.UserDetails.User_ID);
+                            authFact.setAccessToken(response.headers().token);
+                            location.reload();
+                        } else {
+                            $scope.errormsg = response.data.errorMessage;
+                            console.log($scope.errormsg);
+                            $scope.errorlogin = true;
+                            $scope.islogedin = false;
+                        }
+                    }, function (reason) {
+                        console.log(reason.data);
+                    });
             }
         });
     };
@@ -1710,13 +1735,11 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
     };
     //create clinic list
     $scope.listofclinics = [];
-    $scope.medid = 3;
     //add or remove clinic
     $scope.addremoveclinic = function (x, y, a, b, c, d, e, f, g, h, i, j, k) {//ClinicName, ClinicNameAR, ClinicPrice, ClinicAddress, ClinicAddressAR, ClinicCityID, ClinicAreaID, MobileNumber, ClinicLandLine, ClinicRequestsPerDay, ClinicDiscount
         //console.log(x);//add or remove(true or false)
-        //console.log($scope.medid);
         if (x) {
-            $scope.listofclinics.push({"Clinic_ID": $scope.medid,
+            $scope.listofclinics.push({"Clinic_ID": 0,
                 "Clinic_Name": a,
                 "Clinic_Name_AR": b,
                 "Price": c,
@@ -1728,7 +1751,6 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
                 "Land_Line": i,
                 "Requests_Per_Day": j,
                 "Discount": k});
-            $scope.medid = $scope.medid + 1;
         } else {
             var i = 0;
             for (i; i < $scope.listofclinics.length; i = i + 1) {
@@ -1764,6 +1786,21 @@ myApp.controller("updatedoctorCrtl", ["$scope", "authFact", "$location", "$cooki
             .then(function (response) {
                 if (response.data.isSuccess) {
                     console.log(response.data.Response);
+                    $http({
+                        method: "GET",
+                        url: "http://yakensolution.cloudapp.net:80/LiveHealthyAdmin/api/Doctors/DoGetDoctorClinics?Doctor_ID=" + $scope.docid + "&PageNumber=1&NumberRecords=100&lang=" + lang
+                    })
+                        .then(function (response) {
+                            if (response.data.isSuccess) {
+                                console.log(response.data.Response);
+                                $scope.savedclinics = response.data.Response.Clinics;
+                            } else {
+                                $scope.errormsg = response.data.errorMessage;
+                                console.log($scope.errormsg);
+                            }
+                        }, function (reason) {
+                            console.log(reason.data);
+                        });
                     $scope.clinicsaved = true;
                 } else {
                     $scope.errormsg = response.data.errorMessage;
