@@ -194,8 +194,8 @@
                                     <div class="col-sm-6 ">
                                         <div class="input-group">
                                             <div class="form-group">
-                                                <label for="">Discount</label>
-                                                <input type="text" class="form-control" ng-model="ClinicDiscount" required>
+                                                <label for="">Discount in Percentage</label>
+                                                <input type="number" class="form-control" ng-model="ClinicDiscount" required min="1" max="100">
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +441,7 @@
                                         <div class="input-group">
                                             <div class="form-group">
                                                 <label for="">الخصم</label>
-                                                <input type="text" class="form-control" ng-model="ClinicDiscount" required>
+                                                <input type="number" class="form-control" ng-model="ClinicDiscount" required min="1" max="100">
                                             </div>
                                         </div>
                                     </div>

@@ -156,8 +156,13 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
     };
     //register
     $scope.upregister = function () {
-        console.log($scope.regpassword);
         console.log($scope.regemail);
+        console.log(document.getElementById("regimage").files[0]);
+        console.log($scope.regpassword);
+        console.log($scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
+        console.log($scope.regadd);
+        console.log($scope.regmob);
+        console.log($scope.regname);
         var form = new FormData();
         form.append("Image", document.getElementById("regimage").files[0]);
         form.append("Email", $scope.regemail);
