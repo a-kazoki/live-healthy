@@ -158,7 +158,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
     $scope.upregister = function () {
         console.log($scope.regemail);
         console.log(document.getElementById("regimage").files[0]);
-        console.log(document.getElementById("regpassword").value);
+        console.log($scope.regpassword);
         console.log($scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
         console.log($scope.regadd);
         console.log($scope.regmob);
@@ -166,7 +166,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
         var form = new FormData();
         form.append("Image", document.getElementById("regimage").files[0]);
         form.append("Email", $scope.regemail);
-        form.append("Password", document.getElementById("regpassword").value);
+        form.append("Password", $scope.regpassword);
         form.append("Age", "0");
         form.append("DOB", $scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
         form.append("Address", $scope.regadd);
@@ -194,7 +194,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
             if (JSON.parse(response).isSuccess) {
                 $http({
                     method: "POST",
-                    data: JSON.stringify({"Email": $scope.regemail, "Password": document.getElementById("regpassword").value, "lang": lang}),
+                    data: JSON.stringify({"Email": $scope.regemail, "Password": $scope.regpassword, "lang": lang}),
                     url: apiurl + "User/Login"
                 })
                     .then(function (response) {
@@ -226,7 +226,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
         var form = new FormData();
         form.append("Image", document.getElementById("subregimage").files[0]);
         form.append("Email", $scope.subregemail);
-        form.append("Password", document.getElementById("subregpassword").value);
+        form.append("Password", $scope.subregpass);
         form.append("Age", "0");
         form.append("DOB", $scope.subdob2 + "/" + $scope.subdob1 + "/" + $scope.subdob3);
         form.append("Address", $scope.subregadd);
