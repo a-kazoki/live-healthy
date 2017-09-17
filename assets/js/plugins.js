@@ -125,6 +125,14 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
     }
     //goto page
     $scope.gotopage = function (x) {$('#regmodal').modal("hide"); $location.path("/" + x); };
+    $scope.gotopageinside = function (x) {
+        if ($scope.islogedin) {
+            $('#regmodal').modal("hide");
+            $location.path("/" + x);
+        } else {
+            $('#loginmodal').modal("show");
+        }
+    };
     //login
     $scope.loginup = function () {
         $http({
@@ -454,8 +462,24 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
 //footerCtrl js
 myApp.controller("footerCtrl", ["$scope", "authFact", "$location", "$cookies", "$http", function ($scope, authFact, $location, $cookies, $http) {
     "use strict";
+    //if already loged in
+    $scope.userid = authFact.getAccessToken();
+    if ($scope.userid === undefined || $scope.userid === null || $scope.userid === "" || $scope.userid === " " || $scope.userid === "0") {
+        $cookies.remove('accessToken');
+        $scope.islogedin = false;
+    } else {
+        $scope.islogedin = true;
+    }
     //goto page
     $scope.gotopage = function (x) {$location.path("/" + x); };
+    $scope.gotopageinside = function (x) {
+        if ($scope.islogedin) {
+            $('#regmodal').modal("hide");
+            $location.path("/" + x);
+        } else {
+            $('#loginmodal').modal("show");
+        }
+    };
     //contact us
     $scope.contactusform = function () {
         $http({
