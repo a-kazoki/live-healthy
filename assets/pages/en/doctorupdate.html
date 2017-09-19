@@ -7,19 +7,14 @@
     <!--   Big container   -->
     <div class="container" ng-controller="updatedoctorCrtl">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-                <h3 ng-if="!mailsent">Welcome, please update your personal data and your clinics and don't forget to press finish at the end.</h3>
+            <div class="col-sm-12">
+                <h3 ng-if="!mailsent && !docarabic">Welcome, please update your personal data and your clinics and don't forget to press finish at the end.</h3>
+                <h3 ng-if="!mailsent && docarabic" dir="rtl">اهلا من فضلك حدث بيناتك الشخصية و العيادات و المواعيد و لا تنسى ان تضغط على الانتهاء في اخر الصفحة</h3>
                 <input type="radio" name="gender" ng-model="docarabic" ng-value=false> English<br>
-                <input type="radio" name="gender" ng-model="docarabic" ng-value=true> Arabic<br>
+                <input type="radio" name="gender" ng-model="docarabic" ng-value=true> العربية<br>
                 <div ng-if="!docarabic" class="admin-box">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist" style="display: none">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div ng-if="!mailsent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">
+                    <div ng-if="!mailsent">
+                        <div>
                             <form ng-submit="docdetails(docnumber, arname, enname, specialityid, docemail, endescription, ardescription)">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -108,10 +103,11 @@
                                 <hr ng-if="!docdatachanged">
                             </form>
                             <div class="pull-right">
-                                <button ng-if="docdatachanged" class='btn btn-primary btn-wd' href="" data-target="#profile" aria-controls="profile" role="tab" data-toggle="tab">Add Clinics</button>
+                                <p ng-if="docdatachanged" class="lead">Now please add your clinics and your schedules</p>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">
+                        <br><br><br>
+                        <div>
                             <h3>Add Your Clinics</h3>
                             <form ng-submit="addremoveclinic(true, 0, ClinicName, ClinicNameAR, ClinicPrice, ClinicAddress, ClinicAddressAR, ClinicCityID, ClinicAreaID, MobileNumber, ClinicLandLine, ClinicRequestsPerDay, ClinicDiscount)">
                                 <div class="row">
@@ -258,14 +254,8 @@
                     <div ng-if="mailsent"><h2>Thanks for your time. Please check your E-mail.</h2></div>
                 </div>
                 <div ng-if="docarabic" class="admin-box" dir="rtl">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist" style="display: none">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div ng-if="!mailsent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">
+                    <div ng-if="!mailsent">
+                        <div>
                             <form ng-submit="docdetails(docnumber, arname, enname, specialityid, docemail, endescription, ardescription)">
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -354,10 +344,10 @@
                                 <hr ng-if="!docdatachanged">
                             </form>
                             <div class="pull-left">
-                                <button ng-if="docdatachanged" class='btn btn-primary btn-wd' href="" data-target="#profile" aria-controls="profile" role="tab" data-toggle="tab">اضافة عيادات</button>
+                                <p class="lead">من فضلك اضف العيادات و المواعيد</p>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">
+                        <div>
                             <h3>اضف عياداتك</h3>
                             <form ng-submit="addremoveclinic(true, 0, ClinicName, ClinicNameAR, ClinicPrice, ClinicAddress, ClinicAddressAR, ClinicCityID, ClinicAreaID, MobileNumber, ClinicLandLine, ClinicRequestsPerDay, ClinicDiscount)">
                                 <div class="row">
