@@ -166,7 +166,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
     $scope.upregister = function () {
         console.log($scope.regemail);
         console.log(document.getElementById("regimage").files[0]);
-        console.log($scope.regpassword);
+        console.log($scope.regpass);
         console.log($scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
         console.log($scope.regadd);
         console.log($scope.regmob);
@@ -174,7 +174,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
         var form = new FormData();
         form.append("Image", document.getElementById("regimage").files[0]);
         form.append("Email", $scope.regemail);
-        form.append("Password", $scope.regpassword);
+        form.append("Password", $scope.regpass);
         form.append("Age", "0");
         form.append("DOB", $scope.dob2 + "/" + $scope.dob1 + "/" + $scope.dob3);
         form.append("Address", $scope.regadd);
@@ -202,7 +202,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
             if (JSON.parse(response).isSuccess) {
                 $http({
                     method: "POST",
-                    data: JSON.stringify({"Email": $scope.regemail, "Password": $scope.regpassword, "lang": lang}),
+                    data: JSON.stringify({"Email": $scope.regemail, "Password": $scope.regpass, "lang": lang}),
                     url: apiurl + "User/Login"
                 })
                     .then(function (response) {
@@ -399,6 +399,7 @@ myApp.controller("headerCtrl", ["$scope", "authFact", "$location", "$cookies", "
                     $scope.regname = $scope.fbregeply.name;
                     $scope.regemail = $scope.fbregeply.email;
                     $scope.choosefacebook = true;
+                    document.getElementById("hidepass").setAttribute("style", "display:none");
                 });
             } else {
                 console.log('User cancelled login or did not fully authorize.');
